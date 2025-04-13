@@ -48,16 +48,18 @@ const Footer = () => {
         <div className="lg:border-t border-gray-800 my-6"></div>
 
         {/* Copyright y créditos */}
-        <div className="flex lg:flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+        <div className="flex flex-row gap-4 justify-between items-center text-gray-500 text-sm">
           <motion.div
             whileHover={{ scale: 1.02 }}
             className="flex items-center mb-4 md:mb-0"
           >
+            <div className="flex items-center w-full">
             <FiHeart className="text-red-500 mx-1" />
             <span className="ml-1">
               © {new Date().getFullYear()} Kevin Pardo Veas. Todos los derechos
               reservados.
             </span>
+            </div>
           </motion.div>
 
           <div className="space-y-4">
