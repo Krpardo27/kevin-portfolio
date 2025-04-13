@@ -1,3 +1,5 @@
+import forms from "@tailwindcss/forms";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -13,6 +15,9 @@ export default {
       secondary: ["Lato", "serif"],
     },
     extend: {
+      colors: {
+        'input-bg': 'bg-gray-900', // equivalente a bg-gray-50
+      },
       animation: {
         "slide-and-back": "slide-and-back 2s ease-in-out infinite",
       },
@@ -25,5 +30,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [forms],
 };
