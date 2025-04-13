@@ -40,14 +40,14 @@ const NavMobile = () => {
               className={`text-2xl p-2 rounded-full transition-colors ${
                 isActive(item.path)
                   ? "text-blue-600 bg-blue-50"
-                  : "text-gray-500 hover:text-blue-500"
+                  : "text-gray-200 hover:text-blue-500"
               }`}
             >
               {item.icon}
             </motion.div>
             <span
-              className={`text-xs mt-1 ${
-                isActive(item.path) ? "text-blue-600" : "text-gray-500"
+              className={`text-[14px] mt-1 ${
+                isActive(item.path) ? "text-white" : "text-gray-500"
               }`}
             >
               {item.name}

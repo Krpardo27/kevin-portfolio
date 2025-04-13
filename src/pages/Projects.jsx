@@ -82,7 +82,7 @@ const Projects = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="border-[1px] rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+                className="border-[1px] border-gray-600 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
               >
                 {/* Imagen del proyecto */}
                 <div className="h-48 overflow-hidden">

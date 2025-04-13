@@ -40,22 +40,22 @@ const Footer = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="bg-gray-900 text-white py-12 px-4"
+      className="bg-gray-900 text-white lg:py-12 py-24 px-4"
     >
       <div className="max-w-6xl mx-auto">
         {/* Columna 2: Redes sociales */}
         {/* Divider */}
-        <div className="border-t border-gray-800 my-6"></div>
+        <div className="lg:border-t border-gray-800 my-6"></div>
 
         {/* Copyright y créditos */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+        <div className="flex lg:flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
           <motion.div
             whileHover={{ scale: 1.02 }}
             className="flex items-center mb-4 md:mb-0"
           >
             <FiHeart className="text-red-500 mx-1" />
             <span className="ml-1">
-              © {new Date().getFullYear()} Kevin Pardo. Todos los derechos
+              © {new Date().getFullYear()} Kevin Pardo Veas. Todos los derechos
               reservados.
             </span>
           </motion.div>
