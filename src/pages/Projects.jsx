@@ -12,49 +12,29 @@ const projectsData = [
     tags: ["React", "Node.js", "MongoDB", "Tailwind CSS", "React Router DOM"],
     github: "https://github.com/Krpardo27/proyecto-hospital",
     demo: "https://proyecto-hospital-git-main-kevin-pardo-veas-projects.vercel.app/",
-    image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8MXx8ZWNvbW1lcmNlfGVufDB8fDB8fHww", 
+    image: "images/projects/hospital.jpg",
   },
+
   {
     id: 2,
-    title: "Dashboard Analytics",
+    title: "Aplicación de Notas",
     description:
-      "Panel de administración con gráficos interactivos y gestión de usuarios.",
-    tags: ["Next.js", "TypeScript", "D3.js"],
-    github: "#",
-    demo: "#",
-    image: "/projects/dashboard.jpg",
+      "Crea notas, edítalas y elimínalas. Esta aplicación de notas es un proyecto de React. Los usuarios pueden crear, editar y eliminar notas fácilmente.",
+    tags: ["React", "Tailwind CSS", "Axios"],
+    github: "https://github.com/Krpardo27/task-manager",
+    demo: "https://task-manager-coral-seven.vercel.app/",
+    image: "images/projects/task-manager.jpg",
   },
   {
     id: 3,
-    title: "App de Tareas",
+    title: "Weather APP",
     description:
-      "Organizador de tareas con arrastrar y soltar, categorías y recordatorios.",
-    tags: ["React", "Firebase", "Redux"],
-    github: "#",
-    demo: "#",
-    image: "/projects/todoapp.jpg",
+      "Este proyecto es una aplicación web para consultar condiciones meteorológicas, desarrollada con React, Vite, Tailwind CSS, FramerMotion. Permite a los usuarios buscar y visualizar el clima actual de cualquier ciudad del mundo.",
+    tags: ["React.js", "Tailwind CSS", "Framer Motion", "Vite"],
+    github: "https://github.com/Krpardo27/weather-app",
+    demo: "https://weather-app-xi-pink-14.vercel.app/",
+    image: "images/projects/weather.jpg",
   },
-  {
-    id: 4,
-    title: "App de Tareas",
-    description:
-      "Organizador de tareas con arrastrar y soltar, categorías y recordatorios.",
-    tags: ["React", "Firebase", "Redux"],
-    github: "#",
-    demo: "#",
-    image: "/projects/todoapp.jpg",
-  },
-  {
-    id: 5,
-    title: "App de Tareas",
-    description:
-      "Organizador de tareas con arrastrar y soltar, categorías y recordatorios.",
-    tags: ["React", "Firebase", "Redux"],
-    github: "#",
-    demo: "#",
-    image: "/projects/todoapp.jpg",
-  },
-  // Agrega más proyectos según necesites
 ];
 
 const Projects = () => {
@@ -89,7 +69,7 @@ const Projects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform transform hover:scale-105"
                   />
                 </div>
 
