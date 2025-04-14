@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import {
+  FaUser,
+  FaEnvelope,
+  FaComment,
+  FaPhoneAlt,
+  FaPaperPlane,
+  FaCheckCircle,
+  FaExclamationCircle
+} from "react-icons/fa";
+import { ImSpinner8 } from "react-icons/im";
 import PageTransition from "../components/PageTransition";
-import { Link } from "react-router-dom";
-import { FaChevronRight } from "react-icons/fa";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,231 +18,161 @@ const Contact = () => {
     phone: "",
     message: "",
   });
-
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
-    // Clear error when user types
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: "",
-      });
-    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const validateForm = () => {
-    let valid = true;
-    const newErrors = { ...errors };
-
-    // Validate name
-    if (!formData.name.trim()) {
-      newErrors.name = "El nombre es requerido";
-      valid = false;
-    } else if (formData.name.trim().length < 3) {
-      newErrors.name = "El nombre debe tener al menos 3 caracteres";
-      valid = false;
-    }
-
-    // Validate email
-    if (!formData.email.trim()) {
-      newErrors.email = "El email es requerido";
-      valid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Por favor ingresa un email válido";
-      valid = false;
-    }
-
-    // Validate phone (optional but must be valid if provided)
-    if (formData.phone && !/^[0-9+\-\s]+$/.test(formData.phone)) {
-      newErrors.phone = "Por favor ingresa un teléfono válido";
-      valid = false;
-    }
-
-    // Validate message
-    if (!formData.message.trim()) {
-      newErrors.message = "El mensaje es requerido";
-      valid = false;
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = "El mensaje debe tener al menos 10 caracteres";
-      valid = false;
-    }
-
-    setErrors(newErrors);
-    return valid;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setStatus("sending");
 
-    if (validateForm()) {
-      setIsSubmitting(true);
+    try {
+      const response = await fetch("https://www.kevcodesdev.cl/api/contacto", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(formData),
+        credentials: "same-origin" // Importante para cookies si las usas
+      });
 
-      // Simulate API call
-      setTimeout(() => {
-        console.log("Form submitted:", formData);
-        setIsSubmitting(false);
-        setSubmitSuccess(true);
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          message: "",
-        });
-
-        // Hide success message after 5 seconds
-        setTimeout(() => setSubmitSuccess(false), 5000);
-      }, 1500);
+      if (!response.ok) throw new Error("Error en la respuesta del servidor");
+      
+      setStatus("success");
+      setFormData({ name: "", email: "", phone: "", message: "" });
+      
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+      setStatus("error");
     }
   };
 
   return (
     <PageTransition>
-      <section className="lg:mt-32 mt-20 flex flex-col h-screen">
-        <div className="w-full container lg:mx-64 max-w-xl shadow-lg rounded-lg p-8">
-          <div className="mb-8">
-            <h1 className="text-6xl font-bold text-white mb-6">Contáctame.</h1>
-            <p className="text-white text-lg mb-4">
-              O envíame un correo electrónico directamente a
+      <section className="min-h-screen mt-20 max-w-7xl mx-auto px-6 py-12 flex flex-col items-center justify-center">
+        <div className="mb-8 text-center">
+          <h1 className="text-6xl font-bold text-white mb-6">Contáctame</h1>
+          <p className="text-white text-lg mb-4">
+            O envíame un correo electrónico directamente a
+            <a href="mailto:kevin.pardov26@gmail.com" className="text-blue-400 hover:underline ml-1">
               kevin.pardov26@gmail.com
-            </p>
-          </div>
-          {submitSuccess && (
-            <div className="mb-4 p-4 bg-green-100 text-green-700 rounded">
-              ¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-4 max-w-4xl">
-            {/* Nombre */}
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Ingresa tu nombre
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${
-                  errors.name
-                    ? "border-red-500"
-                    : "border-gray-500 border-[0.5px] "
-                } rounded-md shadow-sm  focus:outline-none focus:ring-gray-500 focus:border-gray-300 bg-gray-900 text-white`}
-              />
-              {errors.name && (
-                <p className="mt-1 text-sm text-red-600">{errors.name}</p>
-              )}
-            </div>
-
-            {/* Email */}
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Ingresa tu email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${
-                  errors.email ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm  focus:outline-none focus:ring-gray-500 focus:border-gray-300 bg-gray-900 text-white`}
-              />
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-              )}
-            </div>
-
-            {/* Teléfono */}
-            <div>
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Ingresa tu teléfono (opcional)
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${
-                  errors.phone ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm  focus:outline-none focus:ring-gray-500 focus:border-gray-300 bg-gray-900 text-white`}
-              />
-              {errors.phone && (
-                <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
-              )}
-            </div>
-
-            {/* Mensaje */}
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Ingresa tu mensaje
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                value={formData.message}
-                onChange={handleChange}
-                className={`mt-1 block w-full px-3 py-2 border ${
-                  errors.message ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm  focus:outline-none focus:ring-gray-500 focus:border-gray-300 bg-gray-900 text-white`}
-              />
-              {errors.message && (
-                <p className="mt-1 text-sm text-red-600">{errors.message}</p>
-              )}
-            </div>
-
-            {/* Submit Button */}
-            <div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full max-w-[250px] flex justify-center py-5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-[#e1e1e1] hover:bg-[#e1e1e1] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#e1e1e1] ${
-                  isSubmitting ? "opacity-70 cursor-not-allowed" : ""
-                }`}
-              >
-                {isSubmitting ? "Enviando..." : "Enviar mensaje"}
-              </button>
-            </div>
-            <Link
-              to="/"
-              className="flex items-center my-5 gap-8 text-[#e1e1e1] bg py-3 w-full max-w-max group"
-            >
-              Home
-              <FaChevronRight className="animate-slide-and-back" />
-            </Link>
-          </form>
+            </a>
+          </p>
         </div>
+
+        {/* Alertas mejoradas */}
+        {status === "success" && (
+          <div className="flex items-center gap-2 p-3 mb-6 bg-green-100/90 text-green-800 rounded-lg max-w-2xl w-full">
+            <FaCheckCircle className="text-green-500 flex-shrink-0" />
+            <span>¡Mensaje enviado con éxito! Te responderé pronto.</span>
+          </div>
+        )}
+        
+        {status === "error" && (
+          <div className="flex items-center gap-2 p-3 mb-6 bg-red-100/90 text-red-800 rounded-lg max-w-2xl w-full">
+            <FaExclamationCircle className="text-red-500 flex-shrink-0" />
+            <span>Error al enviar. Por favor intenta nuevamente o contáctame directamente por email.</span>
+          </div>
+        )}
+
+        {/* Formulario */}
+        <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl w-full bg-white/10 p-6 rounded-xl backdrop-blur-sm">
+          {/* Campo Nombre */}
+          <div className="space-y-2">
+            <label htmlFor="name" className="flex items-center gap-2 text-white font-medium">
+              <FaUser className="text-blue-400" />
+              Nombre:
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-white/50"
+              placeholder="Tu nombre completo"
+            />
+          </div>
+
+          {/* Campo Email */}
+          <div className="space-y-2">
+            <label htmlFor="email" className="flex items-center gap-2 text-white font-medium">
+              <FaEnvelope className="text-blue-400" />
+              Email:
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-white/50"
+              placeholder="tucorreo@ejemplo.com"
+            />
+          </div>
+
+          {/* Campo Teléfono */}
+          <div className="space-y-2">
+            <label htmlFor="phone" className="flex items-center gap-2 text-white font-medium">
+              <FaPhoneAlt className="text-blue-400" />
+              Teléfono (opcional):
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-white/50"
+              placeholder="+52 55 1234 5678"
+            />
+          </div>
+
+          {/* Campo Mensaje */}
+          <div className="space-y-2">
+            <label htmlFor="message" className="flex items-center gap-2 text-white font-medium">
+              <FaComment className="text-blue-400" />
+              Mensaje:
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+              rows="6"
+              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-white/50"
+              placeholder="Escribe tu mensaje aquí..."
+            />
+          </div>
+
+          {/* Botón de envío mejorado */}
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className={`flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg font-medium transition-all mt-4 ${
+              status === "sending"
+                ? "bg-blue-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700 hover:shadow-lg"
+            } text-white`}
+          >
+            {status === "sending" ? (
+              <>
+                <ImSpinner8 className="animate-spin" /> Enviando...
+              </>
+            ) : (
+              <>
+                <FaPaperPlane /> Enviar Mensaje
+              </>
+            )}
+          </button>
+        </form>
       </section>
     </PageTransition>
   );

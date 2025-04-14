@@ -53,7 +53,7 @@ const Experience = () => {
     <PageTransition>
       <section className="min-h-screen lg:mt-32 mt-20 max-w-7xl mx-auto px-6 py-12 flex flex-col items-center justify-center">
         <div className="lg:w-[950px] mx-auto">
-          {/* Título */}
+          {/* Título */ }
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
