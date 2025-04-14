@@ -16,17 +16,17 @@ const About = () => {
     {
       year: "2023",
       title: "Certificado React JS",
-      institution: "Tech Solutions Inc.",
+      institution: "CoderHouse",
       image: "/images/education/coderhouse.png",
       description:
-        "Desarrollo de aplicaciones web con React, Next.js y TypeScript",
+        "Curso de React.js: desde configuración y JSX hasta componentes, hooks, API calls, routing, Context API, Firebase y workshop final.",
     },
     {
       year: "2022",
       title: "Certificado JavaScript",
       institution: "CoderHouse",
       image: "/images/education/coderhouse.png",
-      description: "Especialización en tecnologías modernas de desarrollo web",
+      description: "JavaScript desde cero: fundamentos, DOM, jQuery, AJAX, JSON y workshops prácticos.",
     },
     {
       year: "2019 - 2022",
@@ -48,7 +48,7 @@ const About = () => {
 
   return (
     <PageTransition>
-      <section className="min-h-screen lg:mt-32 mt-20 max-w-7xl mx-auto px-6 py-12 flex flex-col items-center justify-center">
+      <section className="min-h-screen lg:mt-32 mt-20 max-w-3xl mx-auto px-6 py-12 flex flex-col items-center justify-center">
         {/* Sección Intro */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

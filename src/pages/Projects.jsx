@@ -62,54 +62,58 @@ const Projects = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="border-[1px] border-gray-600 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+                className="border-[1px] border-gray-600 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col"
               >
-                {/* Imagen del proyecto */}
-                <div className="h-48 overflow-hidden">
+                {/* Contenedor de imagen con altura fija */}
+                <div className="w-full h-64 overflow-hidden"> {/* Ajusta h-48 según necesites */}
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform transform hover:scale-105"
+                    className="lg:w-full lg:h-full object-cover transition-transform hover:scale-105"
                   />
                 </div>
 
-                {/* Contenido de la card */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2">
+                {/* Contenido de la card - flex-grow para ocupar el espacio restante */}
+                <div className="p-6 flex-grow flex flex-col">
+                  <h3 className="text-xl font-bold text-white mb-2 line-clamp-1"> {/* line-clamp para texto largo */}
                     {project.title}
                   </h3>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
+                  <p className="text-gray-400 mb-4 line-clamp-2"> {/* Ajusta line-clamp según necesites */}
+                    {project.description}
+                  </p>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                  {/* Tags - mt-auto para pegarlo abajo si el contenido es variable */}
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Botones */}
+                    <div className="flex space-x-4">
+                      <a
+                        href={project.github}
+                        className="flex items-center text-gray-400 hover:text-gray-900"
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Botones */}
-                  <div className="flex space-x-4">
-                    <a
-                      href={project.github}
-                      className="flex items-center text-gray-400 hover:text-gray-900"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FiGithub className="mr-2 text-white" /> Github
-                    </a>
-                    <a
-                      href={project.demo}
-                      className="flex items-center text-blue-600 hover:text-blue-800"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FiExternalLink className="mr-2" /> Demo
-                    </a>
+                        <FiGithub className="mr-2 text-white" /> Github
+                      </a>
+                      <a
+                        href={project.demo}
+                        className="flex items-center text-blue-600 hover:text-blue-800"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FiExternalLink className="mr-2" /> Demo
+                      </a>
+                    </div>
                   </div>
                 </div>
               </motion.div>
