@@ -84,7 +84,7 @@ const Home = () => {
           </div>
 
           <motion.div
-            className="flex-1 items-center justify-center lg:flex"
+            className="flex-1 items-center justify-center lg:flex hidden"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, ease: "anticipate" }}

@@ -9,7 +9,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 w-full lg:py-8 py-5 z-50 bg-gray-900 border-b border-gray-800 shadow-md">
       <div className=" h-full container flex items-center justify-between w-full max-w-[1100px] mx-auto">
         <div className="flex items-center gap-2 h-full">
-          <h1 className="text-white text-2xl font-primary uppercase">Kevin DEV.</h1>
+          <h1 className="text-white text-2xl font-primary uppercase py-2 px-5">Kevin DEV.</h1>
         </div>
         <div className="hidden lg:block">
           <Navbar />
