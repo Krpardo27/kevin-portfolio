@@ -84,15 +84,15 @@ const Home = () => {
           </div>
 
           <motion.div
-            className="flex-1 items-center justify-center flex hidden lg:flex"
+            className="flex-1 items-center justify-center lg:flex"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, ease: "anticipate" }}
           >
             <motion.img
-              src="/perfil.jpeg"
+              src="/perfil.jpg"
               alt="Kevin Pardo Veas"
-              className="rounded-full lg:w-[300px] lg:h-[300px] object-cover w-[180px] h-[180px] border-2 border-[#e1e1e1] shadow-lg"
+              className="rounded-full lg:w-[350px] lg:h-[350px] object-cover w-[180px] h-[180px] border-2 border-[#e1e1e1] shadow-lg"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             />
