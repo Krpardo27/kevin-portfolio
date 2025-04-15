@@ -12,9 +12,13 @@ const Experience = () => {
       period: "2025 - Presente",
       location: "Eliodoro Yáñez 1783, Providencia, Región Metropolitana",
       description: [
-        "Liderazgo del equipo frontend en proyectos con React y TypeScript",
-        "Implementación de arquitectura micro-frontend",
-        "Optimización de performance (reducción de LCP en 40%)",
+        "Creación de componentes nuevos y modificación de componentes existentes en React JS",
+        "Desarrollo de nuevas funcionalidades para el sitio web de la radio ADN",
+        "Optimización de performance (reducción de LCP, CLS)",
+        "Participación en Sprints ágiles",
+        "Uso y manejo de Github y API REST.",
+        "Creación de nuevas secciones para el sitio web",
+        "Correción de bugs",
       ],
       tech: ["React", "HTML", "CSS", "SASS", "Docker", "Node.js", "Github"],
     },
@@ -27,9 +31,8 @@ const Experience = () => {
       location:
         "Pedro de Valdivia Nte. 0121, Providencia, Región Metropolitana",
       description: [
-        "Desarrollo de 15+ aplicaciones web con React",
-        "Integración con APIs REST y Firebase",
-        "Mentoría a desarrolladores junior",
+        "Encargado del posicionamiento (SEO), rendimiento de las distintas páginas existentes y el desarrollo de estas. Creación de productos en Prestashop",
+        "Creación y modificación de nuevas secciones para páginas principales",
       ],
       tech: ["HTML", "CSS", "JavaScript", "PrestaShop"],
     },
@@ -41,11 +44,10 @@ const Experience = () => {
       period: "2021 - 2022",
       location: "Remoto",
       description: [
-        "Maquetación de interfaces con HTML/CSS",
-        "Implementación de componentes React",
-        "Participación en sprints ágiles",
+        "Encargado del desarrollo y mantención de sitios web, ecommerce y landing pages de clientes, tanto en Chile y en Perú, como regionales.",
+        "Creación de sitio web y ecommerce en Wordpress, HTML, CSS y JavaScript",
       ],
-      tech: ["HTML", "JavaScript", "CSS", "Boostrap", "Wordpress"],
+      tech: ["HTML", "JavaScript", "CSS", "Boostrap", "Wordpress", "Elementor", "WooCommerce"],
     },
   ];
 
