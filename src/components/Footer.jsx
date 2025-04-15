@@ -16,12 +16,12 @@ const Footer = () => {
     {
       name: "GitHub",
       icon: <FiGithub />,
-      url: "https://github.com/tuusuario",
+      url: "https://github.com/Krpardo27",
     },
     {
       name: "LinkedIn",
       icon: <FiLinkedin />,
-      url: "https://linkedin.com/in/tuusuario",
+      url: "https://www.linkedin.com/in/kevinpardoveas/",
     },
     {
       name: "Email",
@@ -29,11 +29,6 @@ const Footer = () => {
       url: "mailto:kevin.pardov26@email.com",
     },
   ];
-
-  
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <motion.footer
