@@ -8,12 +8,12 @@ const Socials = () => {
   return (
     <ul className="flex gap-3 items-center">
       <li>
-        <a href="" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-500 transition-all duration-300">
+        <a href="https://www.linkedin.com/in/kevinpardoveas/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-500 transition-all duration-300">
           <FaLinkedin className="text-2xl" />
         </a>
       </li>
       <li>
-        <a href="" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-500 transition-all duration-300">
+        <a href="mailto:kevin.pardov26@gmail.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-500 transition-all duration-300">
           <IoMail className="text-2xl" />
         </a>
       </li>
