@@ -34,7 +34,7 @@ const About = () => {
       institution: "Instituto Profesional AIEP",
       image: "/images/education/aiep.svg",
       description:
-        "Arquitectura de soluciones en la nube para aplicaciones frontend",
+        "A lo largo de mi formación, adquirí una sólida base en el análisis, desarrollo y gestión de software, así como en la implementación de sistemas de información. Esta carrera me permitió desarrollar habilidades en programación, asegurando la creación de soluciones informáticas eficientes, seguras y alineadas con las necesidades del cliente. Durante mi formación, profundicé en el ciclo completo del desarrollo de software: desde el análisis y diseño hasta la implementación y mantenimiento de sistemas.",
     },
   ];
 
