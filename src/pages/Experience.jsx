@@ -16,7 +16,7 @@ const Experience = () => {
         "Implementación de arquitectura micro-frontend",
         "Optimización de performance (reducción de LCP en 40%)",
       ],
-      tech: ["React", "HTML", "CSS", "SASS", "Docker", "Node.js"],
+      tech: ["React", "HTML", "CSS", "SASS", "Docker", "Node.js", "Github"],
     },
     {
       id: 2,
@@ -45,7 +45,7 @@ const Experience = () => {
         "Implementación de componentes React",
         "Participación en sprints ágiles",
       ],
-      tech: ["JavaScript", "React", "CSS", "Git"],
+      tech: ["HTML", "JavaScript", "CSS", "Boostrap", "Wordpress"],
     },
   ];
 
