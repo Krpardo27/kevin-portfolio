@@ -59,10 +59,7 @@ const About = () => {
           <h2 className="text-4xl font-bold text-white mb-4">Sobre Mí</h2>
           <div className="w-24 h-1 bg-blue-500 mx-auto mb-8"></div>
           <p className="lg:text-xl text-[16px] text-gray-200 max-w-3xl mx-auto leading-relaxed">
-            Desarrollador Frontend con más de 4 años de experiencia creando
-            interfaces modernas y accesibles. Especializado en React y
-            apasionado por el diseño de UX/UI. Me enfoco en construir
-            aplicaciones escalables con código limpio y buenas prácticas.
+            Frontend Developer enfocado en React.js y JavaScript, con 4 años de experiencia creando interfaces eficientes y atractivas. Domino HTML, CSS/SASS y buenas prácticas de desarrollo. Mi objetivo: código mantenible y experiencias digitales fluidas."
           </p>
         </motion.div>
 

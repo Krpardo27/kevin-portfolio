@@ -55,7 +55,7 @@ const Contact = () => {
     <PageTransition>
       <section className="min-h-screen mt-20 max-w-7xl mx-auto px-6 py-12 flex flex-col items-center justify-center">
         <div className="mb-8 text-center">
-          <h1 className="text-6xl font-bold text-white mb-6">Contáctame</h1>
+          <h1 className="text-4xl font-bold text-[#e1e1e1] font-primary mb-6">Contáctame</h1>
           <p className="text-white text-lg mb-4">
             O envíame un correo electrónico directamente a
             <a href="mailto:kevin.pardov26@gmail.com" className="text-blue-400 hover:underline ml-1">
