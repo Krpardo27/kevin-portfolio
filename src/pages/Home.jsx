@@ -45,7 +45,7 @@ const Home = () => {
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className="font-secondary text-secondary text-lg leading-7 text-[#e1e1e1]"
               >
-                Frontend Dev | React | CSS | Construyendo experiencias digitales con código y café ☕
+                Frontend Dev | React | Construyendo experiencias digitales con código y café ☕
               </motion.p>
 
               <motion.p

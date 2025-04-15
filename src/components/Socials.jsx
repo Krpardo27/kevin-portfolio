@@ -18,7 +18,7 @@ const Socials = () => {
         </a>
       </li>
       <li>
-        <a href="" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-500 transition-all duration-300">
+        <a href="https://wa.link/xmrdpx" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-500 transition-all duration-300">
           <FaWhatsapp className="text-2xl" />
         </a>
       </li>
