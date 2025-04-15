@@ -64,7 +64,6 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* Alertas mejoradas */}
         {status === "success" && (
           <div className="flex items-center gap-2 p-3 mb-6 bg-green-100/90 text-green-800 rounded-lg max-w-2xl w-full">
             <FaCheckCircle className="text-green-500 flex-shrink-0" />
@@ -130,7 +129,7 @@ const Contact = () => {
               value={formData.phone}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-white/50"
-              placeholder="+52 55 1234 5678"
+              placeholder="+56 987654321"
             />
           </div>
 
