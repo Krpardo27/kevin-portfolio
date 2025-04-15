@@ -9,7 +9,7 @@ const Home = () => {
 
   return (
     <PageTransition>
-      <section className="min-h-screen max-w-5xl mx-auto px-6 py-12 flex flex-col items-center justify-center">
+      <section className="min-h-screen max-w-5xl mx-auto lg:px-6 px-6 py-6 lg:py-12 flex flex-col items-center justify-center">
         <motion.div
           className="flex w-full lg:flex-row flex-col"
           initial={{ opacity: 0 }}
@@ -19,7 +19,7 @@ const Home = () => {
             delayChildren: 0.3,
           }}
         >
-          <div className="flex-1 flex gap-5  w-full flex-col">
+          <div className="flex-1 flex lg:gap-5 w-full flex-col">
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -45,9 +45,7 @@ const Home = () => {
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className="font-secondary text-secondary text-lg leading-7 text-[#e1e1e1]"
               >
-                Desarrollador Frontend con experiencia en React JS. Apasionado
-                por crear interfaces intuitivas y dinámicas, con enfoque en
-                rendimiento y accesibilidad.
+                Frontend Dev | React | CSS | Construyendo experiencias digitales con código y café ☕
               </motion.p>
 
               <motion.p

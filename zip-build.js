@@ -5,22 +5,17 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function main() {
-  const buildDir = path.join(__dirname, 'build');
-  const zipPath = path.join(__dirname, 'build.zip');
-  
   try {
-    await zip(buildDir, zipPath);
+    const distDir = path.join(__dirname, 'dist');
+    const zipPath = path.join(__dirname, 'dist.zip');
+    
+    await zip(distDir, zipPath);
     console.log('ZIP creado exitosamente');
-    return 0; // Código de éxito
   } catch (err) {
-    console.error('Error al crear el ZIP:', err);
-    return 1; // Código de error
+    console.error('Error:', err.message);
+    // Alternativa moderna a process.exit(1)
+    throw new Error('Process failed');
   }
 }
 
-main().then(code => {
-  if (code !== 0) {
-    // Forzar salida con error
-    setTimeout(() => { throw new Error('Process failed'); }, 0);
-  }
-});
+main().catch(() => {});
