@@ -1,4 +1,4 @@
-# Gestor de Notas con React 📝
+# Portafolio Profesional - React Js Vite Tailwind CSS 📝
 
 ![Logo](src/assets/logo.jpeg)
 
