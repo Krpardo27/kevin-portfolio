@@ -16,12 +16,12 @@ Este proyecto es un portafolio profesional moderno desarrollado con React, Vite 
 ## **📁 Estructura del Proyecto**
 
 ```plaintext
-├── README.md                  # Documentación del proyecto
-├── vite.config.js             # Configuración de Vite para optimización
+├── README.md                 # Documentación del proyecto
+├── vite.config.js            # Configuración de Vite para optimización
 ├── package.json              # Dependencias y scripts
 ├── public/
+│   ├── images/               # imágenes
 │   ├── favicon.ico           # Favicon del sitio
-│   └── robots.txt            # Configuración para motores de búsqueda
 ├── src/
 │   ├── assets/               # Recursos estáticos
 │   │   ├── images/           # Imágenes optimizadas
