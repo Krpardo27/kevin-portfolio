@@ -25,7 +25,6 @@ Este proyecto es un portafolio profesional moderno desarrollado con React, Vite 
 ├── src/
 │   ├── assets/               # Recursos estáticos
 │   │   ├── images/           # Imágenes optimizadas
-│   │   └── fonts/            # Fuentes personalizadas
 │   ├── components/           # Componentes reutilizables
 │   │   ├── Header/           # Barra de navegación responsive
 │   │   ├── Footer/           # Tarjeta de proyecto interactiva
