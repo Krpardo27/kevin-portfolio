@@ -12,7 +12,7 @@ const Header = () => {
         <div className="flex items-center gap-2 h-full">
           <Link to="/">
             <h1 className="text-white text-2xl font-primary uppercase py-2 px-5">
-              Kevin DEV.
+            Kevin DEV.
             </h1>
           </Link>
         </div>
