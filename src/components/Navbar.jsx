@@ -92,13 +92,13 @@ const NavBar = () => {
               className={`flex items-center relative px-3 py-2 rounded-md text-sm font-medium group
                 ${
                   isActive("/contact")
-                    ? "bg-blue-500 text-white"
-                    : "text-gray-700 hover:bg-blue-500"
+                    ? "text-blue-600"
+                    : "text-[#F5F5F5] hover:text-blue-500"
                 }`}
             >
               Contact
               <span
-                className={`absolute bottom-0 left-0  bg-blue-500 transition-all duration-300 
+                className={`absolute bottom-0 left-0 h-0.5 bg-blue-500 transition-all duration-300
                 ${isActive("/contact") ? "w-full" : "w-0 group-hover:w-full"}`}
               ></span>
             </Link>
