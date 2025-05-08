@@ -20,10 +20,9 @@ const NavBar = () => {
               to="/"
               onClick={scrollToTop}
               className={`flex items-center relative px-1 py-2 transition-colors group
-                ${
-                  isActive("/")
-                    ? "text-blue-600"
-                    : "text-[#F5F5F5] hover:text-blue-500"
+                ${isActive("/")
+                  ? "text-blue-600"
+                  : "text-[#F5F5F5] hover:text-blue-500"
                 }`}
             >
               Inicio
@@ -37,10 +36,9 @@ const NavBar = () => {
               to="/about"
               onClick={scrollToTop}
               className={`flex items-center relative px-1 py-2 transition-colors group
-                ${
-                  isActive("/about")
-                    ? "text-blue-600"
-                    : "text-[#F5F5F5] hover:text-blue-500"
+                ${isActive("/about")
+                  ? "text-blue-600"
+                  : "text-[#F5F5F5] hover:text-blue-500"
                 }`}
             >
               Acerca
@@ -54,18 +52,16 @@ const NavBar = () => {
               to="/experience"
               onClick={scrollToTop}
               className={`flex items-center relative px-1 py-2 transition-colors group
-                ${
-                  isActive("/experience")
-                    ? "text-blue-600"
-                    : "text-[#F5F5F5] hover:text-blue-500"
+                ${isActive("/experience")
+                  ? "text-blue-600"
+                  : "text-[#F5F5F5] hover:text-blue-500"
                 }`}
             >
               Experiencia
               <span
                 className={`absolute bottom-0 left-0 h-0.5 bg-blue-500 transition-all duration-300 
-                ${
-                  isActive("/experience") ? "w-full" : "w-0 group-hover:w-full"
-                }`}
+                ${isActive("/experience") ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
               ></span>
             </Link>
 
@@ -73,10 +69,9 @@ const NavBar = () => {
               to="/projects"
               onClick={scrollToTop}
               className={`flex items-center relative px-1 py-2 transition-colors group
-                ${
-                  isActive("/projects")
-                    ? "text-blue-600"
-                    : "text-[#F5F5F5] hover:text-blue-500"
+                ${isActive("/projects")
+                  ? "text-blue-600"
+                  : "text-[#F5F5F5] hover:text-blue-500"
                 }`}
             >
               Proyectos
@@ -89,16 +84,15 @@ const NavBar = () => {
             <Link
               to="/contact"
               onClick={scrollToTop}
-              className={`flex items-center relative px-3 py-2 rounded-md text-sm font-medium group
-                ${
-                  isActive("/contact")
-                    ? "bg-blue-500 text-white"
-                    : "text-gray-700 hover:bg-blue-500"
+              className={`flex items-center relative px-1 py-2 transition-colors group
+                ${isActive("/contact")
+                  ? "text-blue-600"
+                  : "text-[#F5F5F5] hover:text-blue-500"
                 }`}
             >
               Contact
               <span
-                className={`absolute bottom-0 left-0  bg-blue-500 transition-all duration-300 
+                className={`absolute bottom-0 left-0 h-0.5 bg-blue-500 transition-all duration-300 
                 ${isActive("/contact") ? "w-full" : "w-0 group-hover:w-full"}`}
               ></span>
             </Link>
