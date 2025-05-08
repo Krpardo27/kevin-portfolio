@@ -9,23 +9,20 @@ import Projects from "./pages/Projects";
 import Experience from "./pages/Experience";
 import Footer from "./components/Footer";
 
-
 const App = () => {
   const location = useLocation();
 
   return (
     <div className="min-h-screen container mx-auto w-full">
-      
-      <AnimatePresence mode="wait">
       <Header />
-        {/* Suspense solo es necesario si usas lazy loading */}
-        <Suspense
-          fallback={
-            <div className="flex justify-center items-center h-screen">
-              Loading...
-            </div>
-          }
-        >
+      <Suspense
+        fallback={
+          <div className="flex justify-center items-center h-screen">
+            Loading...
+          </div>
+        }
+      >
+        <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -33,9 +30,9 @@ const App = () => {
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
-        </Suspense>
-        <Footer/>
-      </AnimatePresence>
+        </AnimatePresence>
+      </Suspense>
+      <Footer />
     </div>
   );
 };

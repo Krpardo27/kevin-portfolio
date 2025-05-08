@@ -6,7 +6,7 @@ import {
   FaPhoneAlt,
   FaPaperPlane,
   FaCheckCircle,
-  FaExclamationCircle
+  FaExclamationCircle,
 } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import PageTransition from "../components/PageTransition";
@@ -32,19 +32,18 @@ const Contact = () => {
     try {
       const response = await fetch("https://www.kevcodesdev.cl/api/contacto", {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          Accept: "application/json",
         },
         body: JSON.stringify(formData),
-        credentials: "same-origin" // Importante para cookies si las usas
+        credentials: "include", // IMPORTANTE: habilita credenciales cruzadas (para CORS)
       });
 
       if (!response.ok) throw new Error("Error en la respuesta del servidor");
-      
+
       setStatus("success");
       setFormData({ name: "", email: "", phone: "", message: "" });
-      
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
       setStatus("error");
@@ -55,10 +54,15 @@ const Contact = () => {
     <PageTransition>
       <section className="min-h-screen mt-20 max-w-7xl mx-auto px-6 py-12 flex flex-col items-center justify-center">
         <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-[#e1e1e1] font-primary mb-6">Contáctame</h1>
+          <h1 className="text-4xl font-bold text-[#e1e1e1] font-primary mb-6">
+            Contáctame
+          </h1>
           <p className="text-white text-lg mb-4">
             O envíame un correo electrónico directamente a
-            <a href="mailto:kevin.pardov26@gmail.com" className="text-blue-400 hover:underline ml-1">
+            <a
+              href="mailto:kevin.pardov26@gmail.com"
+              className="text-blue-400 hover:underline ml-1"
+            >
               kevin.pardov26@gmail.com
             </a>
           </p>
@@ -70,19 +74,28 @@ const Contact = () => {
             <span>¡Mensaje enviado con éxito! Te responderé pronto.</span>
           </div>
         )}
-        
+
         {status === "error" && (
           <div className="flex items-center gap-2 p-3 mb-6 bg-red-100/90 text-red-800 rounded-lg max-w-2xl w-full">
             <FaExclamationCircle className="text-red-500 flex-shrink-0" />
-            <span>Error al enviar. Por favor intenta nuevamente o contáctame directamente por email.</span>
+            <span>
+              Error al enviar. Por favor intenta nuevamente o contáctame
+              directamente por email.
+            </span>
           </div>
         )}
 
         {/* Formulario */}
-        <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl w-full bg-white/10 p-6 rounded-xl backdrop-blur-sm">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 max-w-2xl w-full bg-white/10 p-6 rounded-xl backdrop-blur-sm"
+        >
           {/* Campo Nombre */}
           <div className="space-y-2">
-            <label htmlFor="name" className="flex items-center gap-2 text-white font-medium">
+            <label
+              htmlFor="name"
+              className="flex items-center gap-2 text-white font-medium"
+            >
               <FaUser className="text-blue-400" />
               Nombre:
             </label>
@@ -100,7 +113,10 @@ const Contact = () => {
 
           {/* Campo Email */}
           <div className="space-y-2">
-            <label htmlFor="email" className="flex items-center gap-2 text-white font-medium">
+            <label
+              htmlFor="email"
+              className="flex items-center gap-2 text-white font-medium"
+            >
               <FaEnvelope className="text-blue-400" />
               Email:
             </label>
@@ -118,7 +134,10 @@ const Contact = () => {
 
           {/* Campo Teléfono */}
           <div className="space-y-2">
-            <label htmlFor="phone" className="flex items-center gap-2 text-white font-medium">
+            <label
+              htmlFor="phone"
+              className="flex items-center gap-2 text-white font-medium"
+            >
               <FaPhoneAlt className="text-blue-400" />
               Teléfono (opcional):
             </label>
@@ -135,7 +154,10 @@ const Contact = () => {
 
           {/* Campo Mensaje */}
           <div className="space-y-2">
-            <label htmlFor="message" className="flex items-center gap-2 text-white font-medium">
+            <label
+              htmlFor="message"
+              className="flex items-center gap-2 text-white font-medium"
+            >
               <FaComment className="text-blue-400" />
               Mensaje:
             </label>
