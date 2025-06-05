@@ -1,53 +1,54 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import {
   FaUser,
   FaEnvelope,
   FaComment,
   FaPhoneAlt,
-  FaPaperPlane,
-  FaCheckCircle,
   FaExclamationCircle,
 } from "react-icons/fa";
-import { ImSpinner8 } from "react-icons/im";
 import PageTransition from "../components/PageTransition";
+import axios from "axios";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-  const [status, setStatus] = useState("");
+  const {
+    register,
+    setValue,
+    watch,
+    reset,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({});
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const phone = watch("phone");
+
+  const handlePhoneChange = (e) => {
+    let value = e.target.value.replace(/\D/g, ""); // Solo números
+    if (value.length > 9) {
+      value = value.slice(0, 9); // Máximo 9 dígitos
+    }
+    setValue("phone", value);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("sending");
-
-    try {
-      const response = await fetch("https://www.kevcodesdev.cl/api/contacto", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(formData),
-        credentials: "include", // IMPORTANTE: habilita credenciales cruzadas (para CORS)
+  const onSubmit = (values) => {
+    axios
+      .post("https://www.kevcodesdev.cl/api/contacto", values)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Mensaje enviado",
+          text: "Tu mensaje ha sido enviado correctamente.",
+        });
+        reset();
+      })
+      .catch((error) => {
+        console.error("Error al enviar el mensaje:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Error al enviar el mensaje",
+          text: "Por favor, intenta nuevamente más tarde.",
+        });
       });
-
-      if (!response.ok) throw new Error("Error en la respuesta del servidor");
-
-      setStatus("success");
-      setFormData({ name: "", email: "", phone: "", message: "" });
-    } catch (error) {
-      console.error("Error al enviar el formulario:", error);
-      setStatus("error");
-    }
   };
 
   return (
@@ -68,29 +69,36 @@ const Contact = () => {
           </p>
         </div>
 
-        {status === "success" && (
-          <div className="flex items-center gap-2 p-3 mb-6 bg-green-100/90 text-green-800 rounded-lg max-w-2xl w-full">
-            <FaCheckCircle className="text-green-500 flex-shrink-0" />
-            <span>¡Mensaje enviado con éxito! Te responderé pronto.</span>
+        {(errors.name || errors.email || errors.phone) && (
+          <div className="w-full max-w-2xl bg-red-100 text-red-800 p-4 rounded-lg mb-6">
+            <ul className="mt-2 flex flex-col">
+              {errors.name && (
+                <li className="flex items-center">
+                  <FaExclamationCircle className="mr-2" />
+                  {errors.name?.message}
+                </li>
+              )}
+              {errors.email && (
+                <li className="flex items-center">
+                  <FaExclamationCircle className="mr-2" />
+                  {errors.email?.message}
+                </li>
+              )}
+              {errors.phone && (
+                <li className="flex items-center">
+                  <FaExclamationCircle className="mr-2" />
+                  {errors.phone?.message}
+                </li>
+              )}
+            </ul>
           </div>
         )}
 
-        {status === "error" && (
-          <div className="flex items-center gap-2 p-3 mb-6 bg-red-100/90 text-red-800 rounded-lg max-w-2xl w-full">
-            <FaExclamationCircle className="text-red-500 flex-shrink-0" />
-            <span>
-              Error al enviar. Por favor intenta nuevamente o contáctame
-              directamente por email.
-            </span>
-          </div>
-        )}
-
-        {/* Formulario */}
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="space-y-4 max-w-2xl w-full bg-white/10 p-6 rounded-xl backdrop-blur-sm"
         >
-          {/* Campo Nombre */}
+          {/* Nombre */}
           <div className="space-y-2">
             <label
               htmlFor="name"
@@ -102,16 +110,13 @@ const Contact = () => {
             <input
               type="text"
               id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-white/50"
-              placeholder="Tu nombre completo"
+              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 text-white placeholder-white/50"
+              placeholder="Ingresa tu nombre"
+              {...register("name", { required: "El nombre es obligatorio" })}
             />
           </div>
 
-          {/* Campo Email */}
+          {/* Email */}
           <div className="space-y-2">
             <label
               htmlFor="email"
@@ -123,36 +128,45 @@ const Contact = () => {
             <input
               type="email"
               id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-white/50"
+              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 text-white placeholder-white/50"
               placeholder="tucorreo@ejemplo.com"
+              {...register("email", {
+                required: "El email es obligatorio",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Formato de email inválido",
+                },
+              })}
             />
           </div>
 
-          {/* Campo Teléfono */}
+          {/* Teléfono */}
           <div className="space-y-2">
             <label
               htmlFor="phone"
               className="flex items-center gap-2 text-white font-medium"
             >
               <FaPhoneAlt className="text-blue-400" />
-              Teléfono (opcional):
+              Teléfono:
             </label>
             <input
               type="tel"
               id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-white/50"
-              placeholder="+56 987654321"
+              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 text-white placeholder-white/50"
+              placeholder="9XXXXXXXX"
+              value={phone || ""}
+              onChange={handlePhoneChange}
+              {...register("phone", {
+                required: "El número es obligatorio",
+                pattern: {
+                  value: /^[0-9]{9}$/,
+                  message: "Debe contener exactamente 9 dígitos",
+                },
+              })}
             />
           </div>
 
-          {/* Campo Mensaje */}
+          {/* Mensaje (no obligatorio) */}
           <div className="space-y-2">
             <label
               htmlFor="message"
@@ -163,35 +177,18 @@ const Contact = () => {
             </label>
             <textarea
               id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
               rows="6"
-              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-white/50"
+              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 text-white placeholder-white/50"
               placeholder="Escribe tu mensaje aquí..."
+              {...register("message")}
             />
           </div>
 
-          {/* Botón de envío mejorado */}
           <button
             type="submit"
-            disabled={status === "sending"}
-            className={`flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg font-medium transition-all mt-4 ${
-              status === "sending"
-                ? "bg-blue-400 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700 hover:shadow-lg"
-            } text-white`}
+            className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
           >
-            {status === "sending" ? (
-              <>
-                <ImSpinner8 className="animate-spin" /> Enviando...
-              </>
-            ) : (
-              <>
-                <FaPaperPlane /> Enviar Mensaje
-              </>
-            )}
+            Enviar Mensaje
           </button>
         </form>
       </section>
