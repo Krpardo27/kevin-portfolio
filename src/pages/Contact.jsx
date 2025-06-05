@@ -54,7 +54,8 @@ const Contact = () => {
   return (
     <PageTransition>
       <section className="min-h-screen mt-20 max-w-7xl mx-auto px-6 py-12 flex flex-col items-center justify-center">
-        <div className="mb-8 text-center">
+        {/*
+          <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold text-[#e1e1e1] font-primary mb-6">
             Contáctame
           </h1>
@@ -68,6 +69,7 @@ const Contact = () => {
             </a>
           </p>
         </div>
+          */}
 
         {(errors.name || errors.email || errors.phone) && (
           <div className="w-full max-w-2xl bg-red-100 text-red-800 p-4 rounded-lg mb-6">
