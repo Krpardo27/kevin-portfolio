@@ -1,7 +1,8 @@
 import { mailer } from "../config/mailer.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const sendContactEmail = async (req, res) => {
-
   console.log("🧾 Body recibido:", req.body);
 
   const { name, email, phone, message } = req.body;
@@ -12,10 +13,10 @@ export const sendContactEmail = async (req, res) => {
 
   try {
     await mailer.sendMail({
-      from: `"Formulario Web" <${process.env.SMTP_USER}>`,
+      from: `"KevCodes Contacto" <${process.env.SMTP_USER}>`,
       to: process.env.CONTACT_RECEIVER,
       replyTo: email,
-      subject: `📩 Nuevo contacto — ${name}`,
+      subject: `📩 Hola ${name}!`,
       html: `
 <!DOCTYPE html>
 <html lang="es">
