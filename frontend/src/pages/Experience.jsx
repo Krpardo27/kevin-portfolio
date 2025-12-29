@@ -4,7 +4,7 @@ import { experienceData } from "../data/data.js";
 
 const Experience = () => {
   return (
-    <section className="min-h-screen lg:mt-32 mt-20 max-w-7xl mx-auto px-6 py-16 flex flex-col items-center justify-center">
+    <section className="lg:mt-32 mt-8 px-4 py-16 flex flex-col items-center justify-center">
       <div className="lg:w-[950px] mx-auto">
         {/* Título */}
         <div className="text-center mb-20 w-full">

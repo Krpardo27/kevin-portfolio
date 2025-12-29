@@ -2,7 +2,7 @@ import { educationData } from "../data/data.js";
 
 const About = () => {
   return (
-    <section className="min-h-screen lg:mt-32 mt-20 max-w-3xl mx-auto px-6 py-16 flex flex-col items-center justify-center">
+    <section className="lg:mt-32 mt-8 px-4 py-16 flex flex-col items-center justify-center">
       <header className="text-center mb-20 w-full">
         <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 tracking-tight">
           Sobre Mí
