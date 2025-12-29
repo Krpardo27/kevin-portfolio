@@ -4,7 +4,7 @@ import { experienceData } from "../data/data.js";
 
 const Experience = () => {
   return (
-    <section className="lg:mt-32 mt-8 px-4 py-16 flex flex-col items-center justify-center">
+    <section className="lg:mt-32 mt-8 px-4 py-10 flex flex-col items-center justify-center">
       <div className="lg:w-[950px] mx-auto">
         {/* Título */}
         <div className="text-center mb-20 w-full">
@@ -21,8 +21,7 @@ const Experience = () => {
         {/* Timeline */}
         <div className="relative">
           {/* Línea central */}
-          <div className="absolute left-6 md:left-1/2 h-full w-[2px] bg-gradient-to-b from-blue-500/30 via-blue-500/60 to-blue-500/30 -z-10 rounded-full" />
-
+          <div className="lg:absolute left-6 lg:left-1/2 h-full w-[2px] bg-gradient-to-b from-blue-500/30 via-blue-500/60 to-blue-500/30 -z-10 rounded-full" />
           {experienceData.map((job, index) => (
             <div
               key={job.id}
@@ -31,7 +30,7 @@ const Experience = () => {
               }`}
             >
               {/* Fecha mobile */}
-              <div className="md:hidden flex items-center mb-4 gap-3 text-gray-400">
+              <div className="lg:hidden flex items-center mb-4 gap-5 text-gray-400">
                 <FiCalendar className="text-blue-400" />
                 <span className="text-sm">{job.period}</span>
               </div>
@@ -74,7 +73,7 @@ const Experience = () => {
                 <ul className="space-y-2 mb-6 text-white text-sm leading-relaxed">
                   {job.description.map((item, i) => (
                     <li key={i} className="flex gap-2">
-                      <span className="text-blue-400 mt-1">•</span>
+                      <span className="text-blue-400">•</span>
                       <span>{item}</span>
                     </li>
                   ))}
