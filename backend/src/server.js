@@ -4,25 +4,33 @@ import contactRoutes from "./routes/contactRoutes.js";
 
 const app = express();
 
-app.use((req, res, next) => {
-  console.log("➡️ Request:", req.method, req.originalUrl);
-  next();
-});
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://kevcodesdev.cl",
+  "https://www.kevcodesdev.cl",
+];
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://www.kevcodesdev.cl",
-      "http://kevcodesdev.cl",
-    ],
+    origin: function (origin, callback) {
+      // permitir herramientas como Postman o curl
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: false,
   })
 );
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ⬇️ AQUÍ está el cambio CLAVE
-app.use("/api/", contactRoutes);
+app.use("/api", contactRoutes);
 
 export default app;
