@@ -3,7 +3,7 @@ import { projectsData } from "../data/data.js";
 
 const Projects = () => {
   return (
-    <section className="lg:mt-32 mt-8 px-4 py-16 flex flex-col items-center justify-center">
+    <section className="lg:mt-32 mt-8 px-4 py-10 flex flex-col items-center justify-center">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="text-center mb-20">

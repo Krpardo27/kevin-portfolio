@@ -7,7 +7,7 @@ const MainLayout = () => {
   return (
     <div className="w-full ">
       <Header />
-      <main className="container mx-auto max-w-6xl min-h-screen px-4 py-8">
+      <main className="container mx-auto max-w-6xl min-h-[100dvh] px-4 py-8">
         <Outlet />
       </main>
       <Footer />
