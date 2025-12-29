@@ -35,7 +35,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api", contactRoutes);
+app.use("/", contactRoutes);
 
 const PORT = process.env.PORT || 5000;
 
