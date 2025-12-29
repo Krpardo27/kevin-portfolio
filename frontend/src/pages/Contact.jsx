@@ -29,16 +29,27 @@ const Contact = () => {
   });
 
   const onSubmit = async (data) => {
+    console.log("POST →", `${import.meta.env.VITE_BACKEND_URL}/contact`);
+
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/api/contact`, data, {
-        headers: { "Content-Type": "application/json" },
-      });
-      reset();
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/contact`,
+
+        data,
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      if (res.status === 200 && res.data?.ok) {
+        reset();
+      } else {
+        throw new Error("Respuesta inválida del servidor");
+      }
     } catch (error) {
       setError("root", {
         type: "server",
         message:
           error?.response?.data?.message ||
+          error.message ||
           "No se pudo enviar el mensaje. Intenta nuevamente.",
       });
     }

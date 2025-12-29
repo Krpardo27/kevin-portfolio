@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import contactRoutes from "./routes/contactRoutes.js";
@@ -13,24 +14,34 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      // permitir herramientas como Postman o curl
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+        return callback(null, true);
       }
+
+      return callback(new Error("Not allowed by CORS"));
     },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: false,
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ⬇️ AQUÍ está el cambio CLAVE
+app.use((req, res, next) => {
+  console.log("➡️", req.method, req.originalUrl);
+  next();
+});
+
 app.use("/api", contactRoutes);
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Frontend permitido: ${process.env.FRONTEND_URL}`);
+});
 
 export default app;

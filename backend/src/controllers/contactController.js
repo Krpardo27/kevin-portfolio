@@ -1,6 +1,4 @@
 import { mailer } from "../config/mailer.js";
-import dotenv from "dotenv";
-dotenv.config();
 
 export const sendContactEmail = async (req, res) => {
   console.log("🧾 Body recibido:", req.body);
@@ -12,6 +10,9 @@ export const sendContactEmail = async (req, res) => {
   }
 
   try {
+    await mailer.verify();
+    console.log("✅ SMTP verificado correctamente");
+    
     await mailer.sendMail({
       from: `"KevCodes Contacto" <${process.env.SMTP_USER}>`,
       to: process.env.CONTACT_RECEIVER,
