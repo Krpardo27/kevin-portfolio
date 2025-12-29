@@ -12,7 +12,7 @@ const NavMobile = () => {
     { path: "/projects", name: "Proyectos", icon: FiFolder },
     { path: "/contact", name: "Contacto", icon: FiMail },
   ];
-
+ 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

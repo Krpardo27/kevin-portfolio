@@ -54,7 +54,7 @@ const Contact = () => {
   }, [isSubmitSuccessful, reset]);
 
   return (
-    <section className="lg:mt-32 mt-8 px-4 py-10 flex flex-col items-center justify-center">
+    <section className="lg:mt-32 mt-8 px-4 py-5 flex flex-col items-center justify-center">
       {/* Header */}
       <div className="mb-8 text-center">
         <h1 className="text-4xl font-bold text-neutral-100 mb-4">Contacto</h1>
