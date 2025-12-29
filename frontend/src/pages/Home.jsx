@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <section className="lg:mt-32 mt-8 px-4 py-10 flex flex-col items-center justify-center">
+    <section className="lg:mt-32 mt-8 px-4 py-5 flex flex-col items-center justify-center">
       <div className="flex w-full flex-col lg:flex-row items-center gap-16">
         {/* Texto */}
         <div className="flex-1 w-full flex flex-col gap-8">
