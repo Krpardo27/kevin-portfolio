@@ -9,7 +9,7 @@ const NavMobile = () => {
     { path: "/", name: "Inicio", icon: FiHome },
     { path: "/about", name: "Acerca", icon: FiUser },
     { path: "/experience", name: "Experiencia", icon: FiBriefcase },
-    { path: "/projects", name: "Proyectos", icon: FiFolder },
+    // { path: "/projects", name: "Proyectos", icon: FiFolder },
     { path: "/contact", name: "Contacto", icon: FiMail },
   ];
  
