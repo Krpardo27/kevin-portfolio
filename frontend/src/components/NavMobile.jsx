@@ -12,7 +12,7 @@ const NavMobile = () => {
     <nav
       aria-label="Navegación móvil"
       className="
-        fixed bottom-0 left-0 right-0 z-50 md:hidden
+        fixed bottom-0 left-0 right-0 z-50 lg:hidden
         bg-gray-900/90 backdrop-blur
         border-t border-white/10
         shadow-[0_-10px_30px_rgba(0,0,0,0.35)]
@@ -27,7 +27,7 @@ const NavMobile = () => {
               className={({ isActive }) =>
                 `
                   flex flex-col items-center gap-1 px-3 py-2
-                  text-[11px] font-medium transition-all
+                  text-[14px] font-medium transition-all
                   ${
                     isActive
                       ? "text-cyan-400 scale-110 -translate-y-0.5"
@@ -43,8 +43,8 @@ const NavMobile = () => {
                   {/* indicador */}
                   <span
                     className={`
-                      h-[2px] rounded-full bg-cyan-400 transition-all duration-300
-                      ${isActive ? "w-4" : "w-0"}
+                      h-[3px] rounded-full bg-cyan-400 transition-all duration-300
+                      ${isActive ? "w-8" : "w-0"}
                     `}
                   />
                 </>
