@@ -78,9 +78,7 @@ const Contact = () => {
           Si quieres contactarme, puedes hacerlo directamente a través de
           cualquiera de estos canales.
         </p>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
-          {/* Email */}
           <a
             href="mailto:kpardoveas@gmail.com"
             className="
@@ -93,8 +91,6 @@ const Contact = () => {
             <FaEnvelope className="text-blue-400 text-xl" />
             kpardoveas@gmail.com
           </a>
-
-          {/* LinkedIn */}
           <a
             href="https://www.linkedin.com/in/kevinpardoveas/"
             target="_blank"
@@ -109,8 +105,6 @@ const Contact = () => {
             <FaLinkedin className="text-sky-500 text-xl" />
             LinkedIn
           </a>
-
-          {/* GitHub */}
           <a
             href="https://github.com/Krpardo27"
             target="_blank"
@@ -125,7 +119,6 @@ const Contact = () => {
             <FaGithub className="text-gray-300 text-xl" />
             GitHub
           </a>
-
           <a
             href="https://wa.me/56990914436"
             target="_blank"
