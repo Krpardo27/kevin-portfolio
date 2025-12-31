@@ -1,138 +1,78 @@
-import { mailer } from "../config/mailer.js";
+import { Resend } from "resend";
+import dotenv from "dotenv";
 
-export const sendContactEmail = async (req, res) => {
-  console.log("🧾 Body recibido:", req.body);
+dotenv.config();
 
-  const { name, email, phone, message } = req.body;
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-  if (!name || !email || !message) {
-    return res.status(400).json({ message: "Datos incompletos" });
-  }
-
+export const enviarContacto = async (req, res) => {
   try {
-    await mailer.verify();
-    console.log("✅ SMTP verificado correctamente");
-    
-    await mailer.sendMail({
-      from: `"KevCodes Contacto" <${process.env.SMTP_USER}>`,
-      to: process.env.CONTACT_RECEIVER,
-      replyTo: email,
-      subject: `📩 Hola ${name}!`,
-      html: `
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Nuevo mensaje</title>
-</head>
-<body style="
-  margin:0;
-  padding:0;
-  background-color:#f4f6f8;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, Arial, sans-serif;
-">
-  <table width="100%" cellpadding="0" cellspacing="0">
-    <tr>
-      <td align="center" style="padding:40px 16px;">
-        <table width="100%" cellpadding="0" cellspacing="0" style="
-          max-width:600px;
-          background:#ffffff;
-          border-radius:12px;
-          box-shadow:0 10px 30px rgba(0,0,0,0.08);
-          overflow:hidden;
-        ">
-          <!-- Header -->
-          <tr>
-            <td style="
-              background:linear-gradient(135deg,#2563eb,#3b82f6);
-              padding:24px;
-              color:#ffffff;
-            ">
-              <h1 style="
-                margin:0;
-                font-size:20px;
-                font-weight:600;
-              ">
-                Nuevo mensaje de contacto
-              </h1>
-              <p style="
-                margin:6px 0 0;
-                font-size:14px;
-                opacity:0.9;
-              ">
-                Formulario web · kevcodesdev.cl
-              </p>
-            </td>
-          </tr>
+    const { nombre, email, telefono, mensaje } = req.body;
 
-          <!-- Content -->
-          <tr>
-            <td style="padding:32px;">
-              <table width="100%" cellpadding="0" cellspacing="0" style="font-size:14px; color:#111827;">
-                <tr>
-                  <td style="padding-bottom:12px;">
-                    <strong>Nombre</strong><br/>
-                    ${name}
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding-bottom:12px;">
-                    <strong>Email</strong><br/>
-                    <a href="mailto:${email}" style="color:#2563eb; text-decoration:none;">
-                      ${email}
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding-bottom:12px;">
-                    <strong>Teléfono</strong><br/>
-                    ${phone || "No informado"}
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding-top:20px;">
-                    <strong>Mensaje</strong>
-                    <div style="
-                      margin-top:8px;
-                      padding:16px;
-                      background:#f9fafb;
-                      border-radius:8px;
-                      color:#374151;
-                      line-height:1.6;
-                    ">
-                      ${message.replace(/\n/g, "<br />")}
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+    console.log("📩 CONTACTO RECIBIDO:", req.body);
 
-          <!-- Footer -->
-          <tr>
-            <td style="
-              padding:16px 24px;
-              background:#f9fafb;
-              font-size:12px;
-              color:#6b7280;
-              text-align:center;
-            ">
-              Este mensaje fue enviado desde el formulario de contacto de
-              <strong>kevcodesdev.cl</strong>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-      `,
+    // Validación mínima
+    if (!nombre || !email) {
+      return res.status(400).json({
+        success: false,
+        message: "Nombre y correo son obligatorios",
+      });
+    }
+
+    const html = `
+      <div style="font-family:Arial,Helvetica,sans-serif;background:#f4f4f5;padding:30px">
+        <div style="max-width:600px;margin:auto;background:white;border-radius:12px;overflow:hidden">
+          
+          <div style="background:#111827;color:white;padding:24px">
+            <h2 style="margin:0;font-size:20px">📩 Nuevo mensaje de contacto</h2>
+          </div>
+
+          <div style="padding:24px;color:#111827;font-size:14px">
+            <p><strong>Nombre:</strong> ${nombre}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Teléfono:</strong> ${telefono || "No informado"}</p>
+
+            <hr style="margin:20px 0;border:none;border-top:1px solid #e5e7eb" />
+
+            <p style="white-space:pre-line">
+              ${mensaje || "Sin mensaje"}
+            </p>
+          </div>
+
+          <div style="padding:16px;text-align:center;font-size:12px;color:#6b7280">
+            Formulario enviado desde el portafolio
+          </div>
+        </div>
+      </div>
+    `;
+
+    const { data, error } = await resend.emails.send({
+      from: "Contacto Web <contacto@kevcodesdev.cl>",
+      to: [process.env.CONTACT_RECEIVER],
+      reply_to: email,
+      subject: `📩 Contacto – ${nombre}`,
+      html,
     });
 
-    return res.status(200).json({ ok: true });
-  } catch (error) {
-    console.error("Mailer error:", error);
-    return res.status(500).json({ message: "Error enviando el correo" });
+    if (error) {
+      console.error("❌ Resend error:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Error enviando el mensaje",
+      });
+    }
+
+    console.log("📨 Email enviado con Resend:", data.id);
+
+    return res.json({
+      success: true,
+      message: "Mensaje enviado correctamente",
+    });
+  } catch (err) {
+    console.error("❌ Error general:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Error interno del servidor",
+    });
   }
 };
