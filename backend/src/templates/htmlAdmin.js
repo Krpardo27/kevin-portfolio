@@ -16,7 +16,7 @@ export const htmlAdmin = ({ nombre, email, telefono, mensaje }) => `
           <tr>
             <td style="padding:24px 28px;border-bottom:1px solid #374151;">
               <h1 style="margin:0;font-size:20px;color:#ffffff;font-weight:600;">
-                Nuevo mensaje desde el formulario
+                Nuevo mensaje desde el Portafolio Web
               </h1>
               <p style="margin:8px 0 0;font-size:14px;color:#9ca3af;">
                 kevcodesdev.cl
@@ -30,17 +30,17 @@ export const htmlAdmin = ({ nombre, email, telefono, mensaje }) => `
               
               <table width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;">
                 <tr>
-                  <td style="padding:6px 0;color:#9ca3af;width:120px;">Nombre</td>
+                  <td style="padding:6px 0;color:#9ca3af;width:120px;">Nombre:</td>
                   <td style="padding:6px 0;color:#ffffff;">${nombre}</td>
                 </tr>
                 <tr>
-                  <td style="padding:6px 0;color:#9ca3af;">Correo</td>
+                  <td style="padding:6px 0;color:#9ca3af;">Correo:</td>
                   <td style="padding:6px 0;color:#60a5fa;">${email}</td>
                 </tr>
                 ${
                   telefono
                     ? `<tr>
-                        <td style="padding:6px 0;color:#9ca3af;">Teléfono</td>
+                        <td style="padding:6px 0;color:#9ca3af;">Teléfono:</td>
                         <td style="padding:6px 0;color:#ffffff;">${telefono}</td>
                       </tr>`
                     : ""
@@ -63,11 +63,10 @@ export const htmlAdmin = ({ nombre, email, telefono, mensaje }) => `
           <tr>
             <td style="padding:16px 28px;background:#111827;border-top:1px solid #374151;">
               <p style="margin:0;font-size:12px;color:#6b7280;text-align:center;">
-                Enviado desde el formulario de contacto · kevcodesdev.cl
+                Enviado desde el formulario del Portafolio · kevcodesdev.cl
               </p>
             </td>
           </tr>
-
         </table>
       </td>
     </tr>
