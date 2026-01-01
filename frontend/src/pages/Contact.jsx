@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import ContactSocials from "../components/ContactSocials";
+import SubmitLoader from "../components/SubmitLoader";
+import { FaPaperPlane } from "react-icons/fa";
 
 const Contact = () => {
   const {
@@ -10,11 +13,21 @@ const Contact = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    await axios.post(`${import.meta.env.VITE_BACKEND_URL}/contact`, data, {
-      headers: { "Content-Type": "application/json" },
-    });
-    reset();
+    try {
+      await Promise.all([
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/contact`, data, {
+          headers: { "Content-Type": "application/json" },
+        }),
+        sleep(600), // ⬅️ tiempo mínimo de envío
+      ]);
+
+      reset();
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   return (
     <section className="bg-gray-900 min-h-screen flex items-center justify-center px-4">
@@ -70,10 +83,23 @@ const Contact = () => {
         </div>
 
         <button
+          type="submit"
           disabled={isSubmitting}
-          className="w-full py-3 rounded-xl bg-white text-gray-900 font-semibold hover:bg-gray-200 transition"
+          className="
+    w-full py-3 rounded-xl
+    bg-white text-gray-900 font-semibold
+    hover:bg-gray-200 transition
+    disabled:opacity-60 disabled:cursor-not-allowed
+    inline-flex items-center justify-center
+  "
         >
-          {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+          {isSubmitting ? (
+            <SubmitLoader loading={isSubmitting} delay={300} />
+          ) : (
+            <div className="flex items-center gap-2">
+              <span>Enviar mensaje</span>
+            </div>
+          )}
         </button>
 
         {isSubmitSuccessful && (
@@ -81,6 +107,7 @@ const Contact = () => {
             Mensaje enviado correctamente
           </p>
         )}
+        <ContactSocials />
       </form>
     </section>
   );
