@@ -36,7 +36,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", contactLimiter, contactRoutes);
+app.use("/api", contactLimiter, contactRoutes);
 
 const PORT = process.env.PORT || 5000;
 
