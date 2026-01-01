@@ -5,11 +5,13 @@ import NavMobile from "../components/NavMobile";
 
 const MainLayout = () => {
   return (
-    <div className="w-full ">
+    <div className="min-h-[100dvh] flex flex-col w-full">
       <Header />
-      <main className="container mx-auto max-w-6xl min-h-screen px-4 pt-10">
+
+      <main className="flex-1 container mx-auto max-w-6xl px-4 pt-10 pb-24 lg:pb-10">
         <Outlet />
       </main>
+
       <Footer />
       <NavMobile />
     </div>
@@ -17,3 +19,4 @@ const MainLayout = () => {
 };
 
 export default MainLayout;
+
