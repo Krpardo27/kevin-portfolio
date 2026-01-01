@@ -6,9 +6,8 @@
 
 @layer base {
 
-
   body {
     font-family: "Inter", system-ui, sans-serif;
-    @apply bg-gray-900 text-white;
+    @apply bg-gray-900 text-white
   }
 }

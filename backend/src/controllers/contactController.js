@@ -1,138 +1,151 @@
-import { mailer } from "../config/mailer.js";
+import { Resend } from "resend";
+import dotenv from "dotenv";
 
-export const sendContactEmail = async (req, res) => {
-  console.log("🧾 Body recibido:", req.body);
+dotenv.config();
 
-  const { name, email, phone, message } = req.body;
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-  if (!name || !email || !message) {
-    return res.status(400).json({ message: "Datos incompletos" });
-  }
+const escapeHtml = (str = "") =>
+  String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
+const isEmailValid = (email = "") =>
+  /^\S+@\S+\.\S+$/.test(String(email).trim());
+
+export const enviarContacto = async (req, res) => {
   try {
-    await mailer.verify();
-    console.log("✅ SMTP verificado correctamente");
-    
-    await mailer.sendMail({
-      from: `"KevCodes Contacto" <${process.env.SMTP_USER}>`,
-      to: process.env.CONTACT_RECEIVER,
-      replyTo: email,
-      subject: `📩 Hola ${name}!`,
-      html: `
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Nuevo mensaje</title>
-</head>
-<body style="
-  margin:0;
-  padding:0;
-  background-color:#f4f6f8;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, Arial, sans-serif;
-">
-  <table width="100%" cellpadding="0" cellspacing="0">
-    <tr>
-      <td align="center" style="padding:40px 16px;">
-        <table width="100%" cellpadding="0" cellspacing="0" style="
-          max-width:600px;
-          background:#ffffff;
-          border-radius:12px;
-          box-shadow:0 10px 30px rgba(0,0,0,0.08);
-          overflow:hidden;
-        ">
-          <!-- Header -->
-          <tr>
-            <td style="
-              background:linear-gradient(135deg,#2563eb,#3b82f6);
-              padding:24px;
-              color:#ffffff;
-            ">
-              <h1 style="
-                margin:0;
-                font-size:20px;
-                font-weight:600;
-              ">
-                Nuevo mensaje de contacto
-              </h1>
-              <p style="
-                margin:6px 0 0;
-                font-size:14px;
-                opacity:0.9;
-              ">
-                Formulario web · kevcodesdev.cl
-              </p>
-            </td>
-          </tr>
+    const { nombre, email, telefono, mensaje, website } = req.body;
 
-          <!-- Content -->
-          <tr>
-            <td style="padding:32px;">
-              <table width="100%" cellpadding="0" cellspacing="0" style="font-size:14px; color:#111827;">
-                <tr>
-                  <td style="padding-bottom:12px;">
-                    <strong>Nombre</strong><br/>
-                    ${name}
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding-bottom:12px;">
-                    <strong>Email</strong><br/>
-                    <a href="mailto:${email}" style="color:#2563eb; text-decoration:none;">
-                      ${email}
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding-bottom:12px;">
-                    <strong>Teléfono</strong><br/>
-                    ${phone || "No informado"}
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding-top:20px;">
-                    <strong>Mensaje</strong>
-                    <div style="
-                      margin-top:8px;
-                      padding:16px;
-                      background:#f9fafb;
-                      border-radius:8px;
-                      color:#374151;
-                      line-height:1.6;
-                    ">
-                      ${message.replace(/\n/g, "<br />")}
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+    if (website && String(website).trim().length > 0) {
+      return res.json({ success: true, message: "OK" }); 
+    }
 
-          <!-- Footer -->
-          <tr>
-            <td style="
-              padding:16px 24px;
-              background:#f9fafb;
-              font-size:12px;
-              color:#6b7280;
-              text-align:center;
-            ">
-              Este mensaje fue enviado desde el formulario de contacto de
-              <strong>kevcodesdev.cl</strong>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-      `,
+    if (!nombre || !email) {
+      return res.status(400).json({
+        success: false,
+        message: "Nombre y correo son obligatorios",
+      });
+    }
+
+    if (!isEmailValid(email)) {
+      return res.status(400).json({
+        success: false,
+        message: "Correo inválido",
+      });
+    }
+
+    const safeNombre = escapeHtml(nombre);
+    const safeEmail = escapeHtml(email);
+    const safeTelefono = escapeHtml(telefono || "");
+    const safeMensaje = escapeHtml(mensaje || "");
+
+    const adminHtml = `
+      <div style="font-family:Arial,Helvetica,sans-serif;background:#f4f4f5;padding:30px">
+        <div style="max-width:620px;margin:auto;background:white;border-radius:14px;overflow:hidden">
+          <div style="background:#111827;color:white;padding:22px 24px">
+            <h2 style="margin:0;font-size:18px">📩 Nuevo mensaje de contacto</h2>
+          </div>
+          <div style="padding:22px 24px;color:#111827;font-size:14px;line-height:1.6">
+            <p style="margin:0 0 10px"><strong>Nombre:</strong> ${safeNombre}</p>
+            <p style="margin:0 0 10px"><strong>Email:</strong> ${safeEmail}</p>
+            <p style="margin:0 0 10px"><strong>Teléfono:</strong> ${
+              safeTelefono || "No informado"
+            }</p>
+
+            <hr style="margin:18px 0;border:none;border-top:1px solid #e5e7eb" />
+
+            <p style="margin:0;white-space:pre-line">${
+              safeMensaje || "Sin mensaje"
+            }</p>
+          </div>
+          <div style="padding:14px 24px;text-align:center;font-size:12px;color:#6b7280;background:#fafafa">
+            Enviado desde tu portafolio
+          </div>
+        </div>
+      </div>
+    `;
+
+    const { error: adminError } = await resend.emails.send({
+      from: "Kevin Portfolio <contacto@kevcodesdev.cl>",
+      to: [process.env.CONTACT_RECEIVER],
+      reply_to: email,
+      subject: `📩 Contacto – ${nombre}`,
+      html: adminHtml,
     });
 
-    return res.status(200).json({ ok: true });
-  } catch (error) {
-    console.error("Mailer error:", error);
-    return res.status(500).json({ message: "Error enviando el correo" });
+    if (adminError) {
+      console.error("❌ Resend admin error:", adminError);
+      return res.status(500).json({
+        success: false,
+        message: "No se pudo enviar el mensaje",
+      });
+    }
+
+    // 2) Email de confirmación hacia el usuario (auto-reply)
+    const userHtml = `
+      <div style="font-family:Arial,Helvetica,sans-serif;background:#0b1220;padding:30px">
+        <div style="max-width:620px;margin:auto;background:#111827;border-radius:14px;overflow:hidden">
+          <div style="padding:22px 24px;background:#0f172a;color:#fff">
+            <h2 style="margin:0;font-size:18px">Gracias por contactarme</h2>
+            <p style="margin:8px 0 0;color:#cbd5e1;font-size:14px">
+              Recibí tu mensaje y te responderé a la brevedad.
+            </p>
+          </div>
+
+          <div style="padding:22px 24px;color:#e5e7eb;font-size:14px;line-height:1.7">
+            <p style="margin:0 0 12px">Hola <strong>${safeNombre}</strong>,</p>
+            <p style="margin:0 0 14px">
+              Este correo confirma que tu mensaje fue recibido correctamente.
+            </p>
+
+            <div style="background:#0b1220;border:1px solid #1f2937;border-radius:12px;padding:14px 16px;margin:16px 0">
+              <p style="margin:0 0 8px;color:#94a3b8;font-size:12px">Resumen</p>
+              <p style="margin:0"><strong>Email:</strong> ${safeEmail}</p>
+              <p style="margin:6px 0 0"><strong>Teléfono:</strong> ${
+                safeTelefono || "No informado"
+              }</p>
+              <p style="margin:10px 0 0;white-space:pre-line"><strong>Mensaje:</strong> ${
+                safeMensaje || "Sin mensaje"
+              }</p>
+            </div>
+
+            <p style="margin:0;color:#94a3b8;font-size:12px">
+              Si no enviaste este mensaje, puedes ignorar este correo.
+            </p>
+          </div>
+
+          <div style="padding:14px 24px;text-align:center;font-size:12px;color:#94a3b8;background:#0f172a">
+            kevcodesdev.cl
+          </div>
+        </div>
+      </div>
+    `;
+
+    const { error: userError } = await resend.emails.send({
+      from: "Kevin Portfolio <contacto@kevcodesdev.cl>",
+      to: [email],
+      subject: "✅ Recibí tu mensaje",
+      html: userHtml,
+    });
+
+    // Si falla el auto-reply, no rompas la UX del usuario (tu email ya llegó)
+    if (userError) {
+      console.warn("⚠️ Resend user confirmation error:", userError);
+    }
+
+    return res.json({
+      success: true,
+      message: "Mensaje enviado correctamente",
+    });
+  } catch (err) {
+    console.error("❌ Error general:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Error interno del servidor",
+    });
   }
 };
