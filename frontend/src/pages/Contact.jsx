@@ -52,8 +52,6 @@ const Contact = () => {
             Escríbeme usando el formulario o por mis redes sociales.
           </p>
         </header>
-
-        {/* Nombre */}
         <div>
           <input
             {...register("nombre", { required: "Nombre requerido" })}
@@ -65,7 +63,6 @@ const Contact = () => {
           )}
         </div>
 
-        {/* Email */}
         <div>
           <input
             {...register("email", {
@@ -83,7 +80,6 @@ const Contact = () => {
           )}
         </div>
 
-        {/* Teléfono */}
         <div>
           <input
             {...register("telefono")}
@@ -92,7 +88,6 @@ const Contact = () => {
           />
         </div>
 
-        {/* Mensaje */}
         <div>
           <textarea
             {...register("mensaje")}
@@ -102,7 +97,6 @@ const Contact = () => {
           />
         </div>
 
-        {/* Botón */}
         <button
           type="submit"
           disabled={isSubmitting}
