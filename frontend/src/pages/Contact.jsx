@@ -25,7 +25,7 @@ const Contact = () => {
   const onSubmit = async (data) => {
     try {
       await Promise.all([
-        axios.post(`${import.meta.env.VITE_BACKEND_URL}/contact`, data, {
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, data, {
           headers: { "Content-Type": "application/json" },
         }),
         sleep(600),
