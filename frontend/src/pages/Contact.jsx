@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from "react-icons/fa";
-import { ImSpinner8 } from "react-icons/im";
+// import { ImSpinner8 } from "react-icons/im";
+import SubmitLoader from "../components/SubmitLoader";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -24,7 +25,7 @@ const Contact = () => {
   const onSubmit = async (data) => {
     try {
       await Promise.all([
-        axios.post(`${import.meta.env.VITE_BACKEND_URL}/contact`, data, {
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, data, {
           headers: { "Content-Type": "application/json" },
         }),
         sleep(600),
@@ -46,6 +47,7 @@ const Contact = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-lg bg-gray-800 rounded-2xl p-8 space-y-6"
       >
+        <SubmitLoader loading={isSubmitting} />
         <header className="space-y-2">
           <h2 className="text-2xl font-semibold text-white">Contáctame</h2>
           <p className="text-gray-400 text-sm">
@@ -82,10 +84,21 @@ const Contact = () => {
 
         <div>
           <input
-            {...register("telefono")}
-            placeholder="Teléfono (opcional)"
+            {...register("telefono", {
+              required: "Teléfono requerido",
+              pattern: {
+                value: /^\+?\d{8,15}$/,
+                message: "Teléfono inválido",
+              },
+            })}
+            placeholder="Teléfono"
             className="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white/10"
           />
+          {errors.telefono && (
+            <p className="text-red-400 text-sm mt-1">
+              {errors.telefono.message}
+            </p>
+          )}
         </div>
 
         <div>
@@ -96,7 +109,6 @@ const Contact = () => {
             className="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 resize-none focus:outline-none focus:ring-2 focus:ring-white/10"
           />
         </div>
-
         <button
           type="submit"
           disabled={isSubmitting}
@@ -108,14 +120,7 @@ const Contact = () => {
             inline-flex items-center justify-center gap-2
           "
         >
-          {isSubmitting ? (
-            <>
-              <ImSpinner8 className="animate-spin" />
-              Enviando…
-            </>
-          ) : (
-            "Enviar mensaje"
-          )}
+          {isSubmitting ? <>Enviando…</> : "Enviar mensaje"}
         </button>
 
         {errors.root?.message && (

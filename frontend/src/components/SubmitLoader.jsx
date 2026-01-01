@@ -19,9 +19,11 @@ const SubmitLoader = ({ loading, delay = 250 }) => {
   if (!show) return null;
 
   return (
-    <div className="flex items-center justify-center gap-3">
-      <ClipLoader size={20} color="#111827" />
-      <span className="text-sm font-medium">Enviando…</span>
+    <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/50 backdrop-blur-sm rounded-2xl">
+      <div className="flex items-center gap-3 bg-gray-900 px-6 py-4 rounded-xl">
+        <ClipLoader size={20} color="#e5e7eb" />
+        <span className="text-sm font-medium text-white">Enviando…</span>
+      </div>
     </div>
   );
 };
