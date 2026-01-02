@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
 import contactRoutes from "./routes/contactRoutes.js";
 
 const app = express();
@@ -27,13 +28,23 @@ app.use(
   })
 );
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 app.use((req, res, next) => {
-  console.log("➡️", req.method, req.originalUrl);
+  if (!["GET", "POST"].includes(req.method)) {
+    return res.sendStatus(405);
+  }
   next();
 });
+
+app.use(helmet());
+app.use(express.json({ limit: "10kb" }));
+app.use(express.urlencoded({ extended: true }));
+
+if (process.env.NODE_ENV !== "production") {
+  app.use((req, res, next) => {
+    console.log("➡️", req.method, req.originalUrl);
+    next();
+  });
+}
 
 app.use("/api", contactRoutes);
 

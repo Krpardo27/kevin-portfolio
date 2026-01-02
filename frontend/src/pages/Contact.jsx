@@ -1,10 +1,8 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from "react-icons/fa";
-// import { ImSpinner8 } from "react-icons/im";
 import SubmitLoader from "../components/SubmitLoader";
-
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+import { useState } from "react";
 
 const Contact = () => {
   const {
@@ -22,16 +20,25 @@ const Contact = () => {
     },
   });
 
+  const [showLoader, setShowLoader] = useState(false);
+
   const onSubmit = async (data) => {
+    setShowLoader(true);
+
     try {
-      await Promise.all([
-        axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, data, {
-          headers: { "Content-Type": "application/json" },
-        }),
-        sleep(600),
-      ]);
-      reset();
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/contact`,
+        data,
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      // espera a que el loader termine su animación
+      setTimeout(() => {
+        reset();
+        setShowLoader(false);
+      }, 900); // debe coincidir con el MIN_VISIBLE_TIME
     } catch (error) {
+      setShowLoader(false);
       setError("root", {
         type: "server",
         message:
@@ -47,7 +54,7 @@ const Contact = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-lg bg-gray-800 rounded-2xl p-8 space-y-6"
       >
-        <SubmitLoader loading={isSubmitting} />
+        <SubmitLoader loading={showLoader} />
         <header className="space-y-2">
           <h2 className="text-2xl font-semibold text-white">Contáctame</h2>
           <p className="text-gray-400 text-sm">

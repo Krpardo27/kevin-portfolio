@@ -6,8 +6,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const enviarContacto = async (req, res) => {
   try {
-    console.log("📩 CONTACT RECIBIDO");
-    console.log("BODY:", req.body);
+    if (process.env.NODE_ENV !== "production") {
+      console.log("BODY:", req.body);
+    }
 
     if (req.body.company) {
       return res.status(200).end();
