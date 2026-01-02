@@ -49,146 +49,195 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-gray-900 min-h-screen flex items-center justify-center px-4">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-lg bg-gray-800 rounded-2xl p-8 space-y-6"
-      >
-        <SubmitLoader loading={showLoader} />
-        <header className="space-y-2">
-          <h2 className="text-2xl font-semibold text-white">Contáctame</h2>
-          <p className="text-gray-400 text-sm">
-            Escríbeme usando el formulario o por mis redes sociales.
-          </p>
-        </header>
-        <div>
-          <input
-            {...register("nombre", { required: "Nombre requerido" })}
-            placeholder="Nombre"
-            className="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white/10"
-          />
-          {errors.nombre && (
-            <p className="text-red-400 text-sm mt-1">{errors.nombre.message}</p>
-          )}
-        </div>
-
-        <div>
-          <input
-            {...register("email", {
-              required: "Correo requerido",
-              pattern: {
-                value: /^\S+@\S+\.\S+$/,
-                message: "Correo inválido",
-              },
-            })}
-            placeholder="Correo"
-            className="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white/10"
-          />
-          {errors.email && (
-            <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
-          )}
-        </div>
-
-        <div>
-          <input
-            {...register("telefono", {
-              required: "Teléfono requerido",
-              pattern: {
-                value: /^\+?\d{8,15}$/,
-                message: "Teléfono inválido",
-              },
-            })}
-            placeholder="Teléfono"
-            className="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white/10"
-          />
-          {errors.telefono && (
-            <p className="text-red-400 text-sm mt-1">
-              {errors.telefono.message}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <textarea
-            {...register("mensaje")}
-            rows={4}
-            placeholder="Mensaje (opcional)"
-            className="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 resize-none focus:outline-none focus:ring-2 focus:ring-white/10"
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={isSubmitting}
+    <section className="bg-gray-900 px-4 py-8 lg:py-16">
+      <div className="max-w-5xl mx-auto flex justify-center">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
           className="
+          w-full max-w-3xl
+          bg-gray-800
+          rounded-xl lg:rounded-2xl
+          p-5 sm:p-6 lg:p-8
+          space-y-6
+          animate-fadeInUp
+          lg:sticky lg:top-24
+        "
+        >
+          <SubmitLoader loading={showLoader} />
+
+          <header className="space-y-2">
+            <h2 className="text-xl sm:text-2xl font-semibold text-white">
+              Contáctame
+            </h2>
+            <p className="text-gray-400 text-sm">
+              Escríbeme usando el formulario o por mis redes sociales.
+            </p>
+          </header>
+
+          <div className="space-y-4 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-6">
+            <div>
+              <input
+                type="text"
+                {...register("nombre", { required: "Nombre requerido" })}
+                placeholder="Nombre"
+                className="
+                w-full px-4 py-2.5 sm:py-3
+                rounded-lg
+                bg-gray-900 text-white
+                border border-gray-700
+                focus:outline-none focus:ring-2 focus:ring-white/10
+              "
+              />
+              {errors.nombre && (
+                <p className="text-red-400 text-sm mt-1">
+                  {errors.nombre.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <input
+                type="email"
+                {...register("email", {
+                  required: "Correo requerido",
+                  pattern: {
+                    value: /^\S+@\S+\.\S+$/,
+                    message: "Correo inválido",
+                  },
+                })}
+                placeholder="Correo"
+                className="
+                w-full px-4 py-2.5 sm:py-3
+                rounded-lg
+                bg-gray-900 text-white
+                border border-gray-700
+                focus:outline-none focus:ring-2 focus:ring-white/10
+              "
+              />
+              {errors.email && (
+                <p className="text-red-400 text-sm mt-1">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <input
+                type="tel"
+                {...register("telefono", {
+                  required: "Teléfono requerido",
+                  pattern: {
+                    value: /^\+?\d{8,15}$/,
+                    message: "Teléfono inválido",
+                  },
+                })}
+                placeholder="Teléfono"
+                className="
+                w-full px-4 py-2.5 sm:py-3
+                rounded-lg
+                bg-gray-900 text-white
+                border border-gray-700
+                focus:outline-none focus:ring-2 focus:ring-white/10
+              "
+              />
+              {errors.telefono && (
+                <p className="text-red-400 text-sm mt-1">
+                  {errors.telefono.message}
+                </p>
+              )}
+            </div>
+
+            <div className="lg:col-span-2">
+              <textarea
+                {...register("mensaje")}
+                rows={4}
+                placeholder="Mensaje (opcional)"
+                className="
+                w-full px-4 py-2.5 sm:py-3
+                rounded-lg
+                bg-gray-900 text-white
+                border border-gray-700
+                resize-none
+                focus:outline-none focus:ring-2 focus:ring-white/10
+              "
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="
             w-full py-3 rounded-xl
             bg-white text-gray-900 font-semibold
             hover:bg-gray-200 transition
             disabled:opacity-60 disabled:cursor-not-allowed
             inline-flex items-center justify-center gap-2
           "
-        >
-          {isSubmitting ? <>Enviando…</> : "Enviar mensaje"}
-        </button>
+          >
+            {isSubmitting ? "Enviando…" : "Enviar mensaje"}
+          </button>
 
-        {errors.root?.message && (
-          <p className="text-red-400 text-center text-sm">
-            {errors.root.message}
-          </p>
-        )}
+          {errors.root?.message && (
+            <p className="text-red-400 text-center text-sm">
+              {errors.root.message}
+            </p>
+          )}
 
-        {isSubmitSuccessful && (
-          <p className="text-green-400 text-center text-sm">
-            Mensaje enviado correctamente
-          </p>
-        )}
+          {isSubmitSuccessful && (
+            <p className="text-green-400 text-center text-sm">
+              Mensaje enviado correctamente
+            </p>
+          )}
 
-        {/* Separador */}
-        <div className="pt-6 border-t border-gray-700 text-center">
-          <p className="text-gray-400 text-sm mb-4">
-            También puedes contactarme en
-          </p>
+          {/* REDES */}
+          <div className="pt-4 lg:pt-6 border-t border-gray-700 text-center">
+            <p className="text-gray-400 text-xs sm:text-sm mb-3">
+              También puedes contactarme en
+            </p>
 
-          <div className="flex justify-center gap-6 text-2xl">
-            <a
-              href="https://www.linkedin.com/in/kevinpardoveas/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-blue-400 transition"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin />
-            </a>
+            <div className="flex justify-center gap-5 text-xl sm:text-2xl">
+              <a
+                href="https://www.linkedin.com/in/kevinpardoveas/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-400 transition"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin />
+              </a>
 
-            <a
-              href="https://github.com/Krpardo27"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition"
-              aria-label="GitHub"
-            >
-              <FaGithub />
-            </a>
+              <a
+                href="https://github.com/Krpardo27"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition"
+                aria-label="GitHub"
+              >
+                <FaGithub />
+              </a>
 
-            <a
-              href="mailto:kpardoveas@gmail.com"
-              className="text-gray-400 hover:text-green-400 transition"
-              aria-label="Email"
-            >
-              <FaEnvelope />
-            </a>
+              <a
+                href="mailto:kpardoveas@gmail.com"
+                className="text-gray-400 hover:text-green-400 transition"
+                aria-label="Email"
+              >
+                <FaEnvelope />
+              </a>
 
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-pink-400 transition"
-              aria-label="Instagram"
-            >
-              <FaInstagram />
-            </a>
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-pink-400 transition"
+                aria-label="Instagram"
+              >
+                <FaInstagram />
+              </a>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </section>
   );
 };
