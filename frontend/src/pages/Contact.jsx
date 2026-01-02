@@ -10,12 +10,13 @@ const Contact = () => {
     handleSubmit,
     reset,
     setError,
+    setValue,
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm({
     defaultValues: {
       nombre: "",
       email: "",
-      telefono: "",
+      telefono: "+569 ",
       mensaje: "",
     },
   });
@@ -124,6 +125,8 @@ const Contact = () => {
             <div>
               <input
                 type="tel"
+                inputMode="numeric"
+                placeholder="+569 "
                 {...register("telefono", {
                   required: "Teléfono requerido",
                   pattern: {
@@ -131,15 +134,49 @@ const Contact = () => {
                     message: "Usa el formato +569XXXXXXXX",
                   },
                 })}
-                placeholder="Teléfono"
+                onChange={(e) => {
+                  let value = e.target.value;
+
+                  // Forzar prefijo
+                  if (!value.startsWith("+569")) {
+                    value = "+569";
+                  }
+
+                  // Limpiar y limitar números
+                  const numeros = value
+                    .replace("+569", "")
+                    .replace(/\D/g, "")
+                    .slice(0, 8);
+
+                  const finalValue = "+569" + numeros;
+
+                  setValue("telefono", finalValue, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  });
+                }}
+                onKeyDown={(e) => {
+                  if (
+                    (e.key === "Backspace" || e.key === "Delete") &&
+                    e.target.selectionStart <= 4
+                  ) {
+                    e.preventDefault();
+                  }
+
+                  if (e.key.length === 1 && !/[0-9]/.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
+                maxLength={12}
                 className="
-                w-full px-4 py-2.5 sm:py-3
-                rounded-lg
-                bg-gray-900 text-white
-                border border-gray-700
-                focus:outline-none focus:ring-2 focus:ring-white/10
-              "
+    w-full px-4 py-2.5 sm:py-3
+    rounded-lg
+    bg-gray-900 text-white
+    border border-gray-700
+    focus:outline-none focus:ring-2 focus:ring-white/10
+  "
               />
+
               {errors.telefono && (
                 <p className="text-red-400 text-sm mt-1">
                   {errors.telefono.message}
@@ -163,7 +200,6 @@ const Contact = () => {
               />
             </div>
           </div>
-
           <button
             type="submit"
             disabled={isSubmitting}
