@@ -127,8 +127,8 @@ const Contact = () => {
                 {...register("telefono", {
                   required: "Teléfono requerido",
                   pattern: {
-                    value: /^\+?\d{8,15}$/,
-                    message: "Teléfono inválido",
+                    value: /^\+569\d{8}$/,
+                    message: "Usa el formato +569XXXXXXXX",
                   },
                 })}
                 placeholder="Teléfono"
