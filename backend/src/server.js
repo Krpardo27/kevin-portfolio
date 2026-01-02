@@ -2,7 +2,6 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import contactRoutes from "./routes/contactRoutes.js";
-import { contactLimiter } from "./middleware/rateLimit.js";
 
 const app = express();
 
@@ -36,7 +35,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", contactRoutes);
+app.use("/api", contactRoutes);
 
 const PORT = process.env.PORT || 5000;
 

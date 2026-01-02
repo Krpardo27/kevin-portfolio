@@ -20,24 +20,18 @@ export const enviarContacto = async (req, res) => {
 
     const { nombre, email, telefono, mensaje } = req.body;
 
+    const safeMessage = mensaje.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
     const recipients = [process.env.CONTACT_TO, process.env.CONTACT_CC].filter(
       Boolean
     );
 
-    const safeMessage = mensaje.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
     await resend.emails.send({
       from: process.env.CONTACT_FROM,
-      to: process.env.CONTACT_TO,
-      bcc: process.env.CONTACT_RECEIVER,
+      to: recipients,
       replyTo: email,
-      subject: `Nuevo mensaje desde kevcodesdev.cl`,
-      html: htmlAdmin({
-        nombre,
-        email,
-        telefono,
-        mensaje: safeMessage,
-      }),
+      subject: "Nuevo mensaje desde kevcodesdev.cl",
+      html: htmlAdmin({ nombre, email, telefono, mensaje: safeMessage }),
     });
 
     res.json({ success: true });
