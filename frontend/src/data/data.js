@@ -96,34 +96,24 @@ export const experienceData = [
 
 export const projectsData = [
   {
-    id: "hospital-project",
-    title: "Sistema de Gestión Hospitalaria",
+    id: "restaurant-landing",
+    title: "Restaurant Landing – Pizzería",
     description:
-      "Aplicación desarrollada en React para la gestión hospitalaria, incluyendo registro de pacientes, manejo de citas médicas y administración de profesionales de la salud.",
-    tags: ["React", "Node.js", "MongoDB", "Tailwind CSS", "React Router"],
-    github: "https://github.com/Krpardo27/proyecto-hospital",
-    demo: "https://proyecto-hospital-git-main-kevin-pardo-veas-projects.vercel.app/",
-    image: "/images/projects/hospital.jpg",
+      "Landing page moderna para restaurante de pizzas, enfocada en experiencia de usuario, diseño editorial y navegación fluida. Incluye hero con slider, menú estilo carta, scroll suave y animaciones sutiles.",
+    tags: ["React", "Tailwind CSS", "Framer Motion", "Swiper", "React Router"],
+    github: "https://github.com/Krpardo27/restaurant-landing",
+    demo: "https://restaurant-landing-one.vercel.app/",
+    image: "/images/projects/restaurant.jpg",
   },
   {
-    id: "notes-app",
-    title: "Aplicación de Notas",
+    id: "coffee-landing",
+    title: "Coffee Landing – Cafetería",
     description:
-      "Aplicación web para crear, editar y eliminar notas de forma simple e intuitiva, enfocada en la gestión básica de información personal.",
-    tags: ["React", "Tailwind CSS", "Axios"],
-    github: "https://github.com/Krpardo27/task-manager",
-    demo: "https://task-manager-coral-seven.vercel.app/",
-    image: "/images/projects/task-manager.jpg",
-  },
-  {
-    id: "weather-app",
-    title: "Weather App",
-    description:
-      "Aplicación web para consultar condiciones meteorológicas en tiempo real, desarrollada con React y Vite. Permite buscar y visualizar el clima actual de cualquier ciudad del mundo.",
-    tags: ["React", "Tailwind CSS", "Framer Motion", "Vite"],
-    github: "https://github.com/Krpardo27/weather-app",
-    demo: "https://weather-app-xi-pink-14.vercel.app/",
-    image: "/images/projects/weather.jpg",
+      "Landing page para cafetería con enfoque en identidad visual y narrativa de marca. Diseño limpio, tipografías elegantes, animaciones suaves y secciones pensadas para storytelling.",
+    tags: ["React", "Tailwind CSS", "Framer Motion", "GSAP", "Vite"],
+    github: "https://github.com/Krpardo27/coffee-landing",
+    demo: "https://coffee-landing-rho.vercel.app/",
+    image: "/images/projects/coffee.jpg",
   },
 ];
 
@@ -152,6 +142,6 @@ export const navigation = [
   { path: "/", label: "Inicio" },
   { path: "/about", label: "Acerca" },
   { path: "/experience", label: "Experiencia" },
-  // { path: "/projects", label: "Proyectos" },
+  { path: "/projects", label: "Proyectos" },
   { path: "/contact", label: "Contacto" },
 ];
