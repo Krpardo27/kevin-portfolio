@@ -8,10 +8,10 @@ const Projects = () => {
     title: "Proyectos React y Full Stack MERN | Kevin Pardo",
     description:
       "Proyectos desarrollados con React, Node.js y MongoDB. Aplicaciones web modernas enfocadas en rendimiento, arquitectura y experiencia de usuario.",
-    canonical: "https://tudominio.dev/projects",
+    canonical: "https://kevcodesdev.cl/projects",
   });
 
-  
+
   return (
     <section className="lg:mt-32 mt-8 px-4 py-5 flex flex-col items-center justify-center">
       <div className="max-w-6xl mx-auto">
