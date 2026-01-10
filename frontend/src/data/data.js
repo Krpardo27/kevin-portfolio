@@ -115,6 +115,27 @@ export const projectsData = [
     demo: "https://coffee-landing-rho.vercel.app/",
     image: "/images/projects/coffee.jpg",
   },
+  {
+    id: "ecommerce-urban-mern",
+    title: "Urban Ecommerce – MERN Stack",
+    description:
+      "Plataforma ecommerce full-stack orientada a moda urbana. Incluye catálogo dinámico, filtrado por categorías, carrito persistente, notificaciones accesibles, loader global, skeleton UI y experiencia SPA optimizada para producción. Arquitectura MERN con deploy real en Vercel y Render.",
+    tags: [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Radix UI",
+      "Context API",
+      "Vercel",
+      "Render",
+    ],
+    github: "https://github.com/Krpardo27/ecommerce-mern",
+    demo: "https://ecommerce-mern-theta-six.vercel.app/",
+    image: "/images/projects/ecommerce-urban.jpg",
+  },
 ];
 
 export const socialLinks = [
