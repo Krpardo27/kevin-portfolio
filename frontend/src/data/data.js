@@ -134,7 +134,7 @@ export const projectsData = [
     ],
     github: "https://github.com/Krpardo27/ecommerce-mern",
     demo: "https://ecommerce-mern-theta-six.vercel.app/",
-    image: "/images/projects/ecommerce-urban.jpg",
+    image: "/images/projects/ecommerce.jpg",
   },
 ];
 
