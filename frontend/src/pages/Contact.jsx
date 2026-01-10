@@ -3,8 +3,17 @@ import { useForm } from "react-hook-form";
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from "react-icons/fa";
 import SubmitLoader from "../components/SubmitLoader";
 import { useState } from "react";
+import { useSEO } from "../hooks/useSEO";
 
 const Contact = () => {
+
+  useSEO({
+    title: "Contacto | Kevin Pardo – Desarrollador Frontend React",
+    description:
+      "Contacto profesional de Kevin Pardo. Disponible para oportunidades como desarrollador frontend React o full stack MERN.",
+    canonical: "https://kevcodesdev.cl/contact",
+  });
+
   const {
     register,
     handleSubmit,

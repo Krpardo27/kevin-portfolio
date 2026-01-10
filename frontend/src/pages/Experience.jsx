@@ -1,8 +1,16 @@
 import { FiCalendar, FiMapPin } from "react-icons/fi";
 import React from "react";
 import { experienceData } from "../data/data.js";
+import { useSEO } from "../hooks/useSEO.js";
 
 const Experience = () => {
+  useSEO({
+    title: "Experiencia | Kevin Pardo – Frontend & Full Stack Developer",
+    description:
+      "Experiencia en desarrollo frontend con React y Tailwind CSS, integración de APIs REST, manejo de estado y proyectos Full Stack MERN.",
+    canonical: "https://kevcodesdev.cl/experience",
+  });
+
   return (
     <section className="lg:mt-32 mt-8 px-4 py-5 flex flex-col items-center justify-center">
       <div className="lg:w-[950px] mx-auto">
@@ -50,6 +58,7 @@ const Experience = () => {
                     <img
                       src={job.logo}
                       alt={job.company}
+                      loading="lazy"
                       className="lg:w-20 lg:h-20 w-[64px] h-[64px] object-contain rounded-full"
                     />
                   </div>

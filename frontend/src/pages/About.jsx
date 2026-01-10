@@ -1,6 +1,15 @@
 import { educationData } from "../data/data.js";
+import { useSEO } from "../hooks/useSEO.js";
 
 const About = () => {
+
+  useSEO({
+    title: "Sobre mí | Kevin Pardo – Desarrollador Frontend React",
+    description:
+      "Desarrollador frontend especializado en React y Tailwind CSS, con experiencia en aplicaciones web modernas, UX, performance y stack MERN.",
+    canonical: "https://kevcodesdev.cl/about",
+  });
+
   return (
     <section className="lg:mt-32 mt-8 px-4 py-5 flex flex-col items-center justify-center">
       <header className="text-center mb-20 w-full">
@@ -21,16 +30,14 @@ const About = () => {
 
         <ul className="space-y-16">
           {educationData.map((item) => (
-            <li
-              key={item.id}
-              className="relative flex items-start gap-6 pl-16"
-            >
+            <li key={item.id} className="relative flex items-start gap-6 pl-16">
               <span className="absolute left-5 top-0 w-6 h-6 rounded-full bg-blue-500 border-4 border-gray-900" />
               <div className="flex-shrink-0">
                 <div className="w-20 h-20 rounded-xl border border-gray-700 bg-white flex items-center justify-center">
                   <img
                     src={item.image}
                     alt={item.institution}
+                    loading="lazy"
                     className="w-20 h-20 object-contain"
                   />
                 </div>

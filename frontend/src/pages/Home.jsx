@@ -1,7 +1,16 @@
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSEO } from "../hooks/useSEO";
 
 const Home = () => {
+
+  useSEO({
+    title: "Kevin Pardo | Desarrollador Frontend React & MERN",
+    description:
+      "Portafolio de Kevin Pardo, desarrollador frontend especializado en React, Tailwind CSS y animaciones modernas.",
+    canonical: "https://kevcodesdev.cl/",
+  });
+
   return (
     <section className="lg:mt-32 mt-8 px-4 py-5 flex flex-col items-center justify-center">
       <div className="flex w-full flex-col lg:flex-row items-center gap-16">
@@ -75,6 +84,7 @@ const Home = () => {
             <img
               src="/perfil.jpg"
               alt="Kevin Pardo Veas"
+              loading="lazy"
               className="rounded-full w-[220px] h-[220px] lg:w-[320px] lg:h-[320px]
       object-cover border border-gray-700 shadow-xl"
             />

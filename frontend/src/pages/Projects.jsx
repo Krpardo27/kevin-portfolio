@@ -1,7 +1,17 @@
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { projectsData } from "../data/data.js";
+import { useSEO } from "../hooks/useSEO.js";
 
 const Projects = () => {
+
+  useSEO({
+    title: "Proyectos React y Full Stack MERN | Kevin Pardo",
+    description:
+      "Proyectos desarrollados con React, Node.js y MongoDB. Aplicaciones web modernas enfocadas en rendimiento, arquitectura y experiencia de usuario.",
+    canonical: "https://tudominio.dev/projects",
+  });
+
+  
   return (
     <section className="lg:mt-32 mt-8 px-4 py-5 flex flex-col items-center justify-center">
       <div className="max-w-6xl mx-auto">
@@ -32,6 +42,7 @@ const Projects = () => {
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
                   className="w-full h-full object-cover
                   transition-transform duration-500
                   group-hover:scale-105"
