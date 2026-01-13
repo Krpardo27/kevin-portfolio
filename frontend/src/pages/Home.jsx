@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useSEO } from "../hooks/useSEO";
 
 const Home = () => {
-
   useSEO({
     title: "Kevin Pardo | Desarrollador Frontend React & MERN",
     description:
@@ -45,12 +44,6 @@ const Home = () => {
               Desarrollo interfaces web funcionales, claras y orientadas al
               rendimiento, priorizando buenas prácticas y una experiencia de
               usuario sólida.
-            </p>
-
-            <p className="text-gray-400 leading-relaxed">
-              Trabajo principalmente con React, JavaScript y CSS moderno,
-              aplicando buenas prácticas de arquitectura frontend, optimización
-              y código mantenible en proyectos reales.
             </p>
           </div>
 
