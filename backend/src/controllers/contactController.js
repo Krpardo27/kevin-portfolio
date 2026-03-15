@@ -19,18 +19,24 @@ export const enviarContacto = async (req, res) => {
 
     const safeMessage = mensaje.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-    res.json({ success: true });
-
-    resend.emails.send({
+    await resend.emails.send({
       from: "Kevin Pardo <contacto@kevcodesdev.cl>",
       to: "kpardoveas@gmail.com",
       replyTo: email,
       subject: "Nuevo mensaje desde kevcodesdev.cl",
-      html: htmlAdmin({ nombre, email, telefono, mensaje: safeMessage }),
+      html: htmlAdmin({
+        nombre,
+        email,
+        telefono,
+        mensaje: safeMessage,
+      }),
     });
+
+    return res.json({ success: true });
   } catch (error) {
     console.error("❌ Error contacto:", error);
-    res.status(500).json({
+
+    return res.status(500).json({
       message: "Error al enviar el mensaje",
     });
   }
