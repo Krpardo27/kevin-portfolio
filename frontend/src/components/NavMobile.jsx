@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { navigation } from "../data/data.js";
+import { navigation } from "../data/navigationData.js";
 
 const NavMobile = () => {
   const location = useLocation();

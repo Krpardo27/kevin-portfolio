@@ -6,10 +6,6 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const enviarContacto = async (req, res) => {
   try {
-    if (process.env.NODE_ENV !== "production") {
-      console.log("BODY:", req.body);
-    }
-
     if (req.body.company) {
       return res.status(200).end();
     }
@@ -23,19 +19,15 @@ export const enviarContacto = async (req, res) => {
 
     const safeMessage = mensaje.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-    const recipients = [process.env.CONTACT_TO, process.env.CONTACT_CC].filter(
-      Boolean
-    );
+    res.json({ success: true });
 
-    await resend.emails.send({
-      from: process.env.CONTACT_FROM,
-      to: recipients,
+    resend.emails.send({
+      from: "Kevin Pardo <contacto@kevcodesdev.cl>",
+      to: "kpardoveas@gmail.com",
       replyTo: email,
       subject: "Nuevo mensaje desde kevcodesdev.cl",
       html: htmlAdmin({ nombre, email, telefono, mensaje: safeMessage }),
     });
-
-    res.json({ success: true });
   } catch (error) {
     console.error("❌ Error contacto:", error);
     res.status(500).json({

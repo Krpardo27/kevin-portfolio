@@ -1,5 +1,5 @@
 import { FiGithub, FiExternalLink } from "react-icons/fi";
-import { projectsData } from "../data/data.js";
+import { projectsData } from "../data/projectsData.js";
 import { useSEO } from "../hooks/useSEO.js";
 
 const Projects = () => {

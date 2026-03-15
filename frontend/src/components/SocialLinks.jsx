@@ -1,5 +1,5 @@
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
-import { socialLinks } from "../data/data.js";
+import { socialLinks } from "../data/socialLinks.js";
 
 const ICONS = {
   github: FiGithub,

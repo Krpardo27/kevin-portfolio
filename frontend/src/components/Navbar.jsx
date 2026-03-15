@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { navigation } from "../data/data.js";
+import { navigation } from "../data/navigationData.js";
 
 const linkBase = "relative text-sm font-medium transition-colors group";
 
