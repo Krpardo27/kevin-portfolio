@@ -13,9 +13,10 @@ const NavMobile = () => {
       aria-label="Navegación móvil"
       className="
         fixed bottom-0 left-0 right-0 z-50 lg:hidden
-        bg-gray-900/90 backdrop-blur
-        border-t border-white/10
-        shadow-[0_-10px_30px_rgba(0,0,0,0.35)]
+h-[64px]
+bg-gray-900/90 backdrop-blur
+border-t border-white/10
+shadow-[0_-10px_30px_rgba(0,0,0,0.35)]
       "
     >
       <ul className="flex items-center justify-between py-2 w-full">
