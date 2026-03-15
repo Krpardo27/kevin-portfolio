@@ -13,6 +13,8 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.5.10",
     "axios": "^1.13.2",
+    "framer-motion": "^12.36.0",
+    "html2pdf.js": "^0.14.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.69.0",

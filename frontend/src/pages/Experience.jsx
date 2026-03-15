@@ -1,6 +1,6 @@
 import { FiCalendar, FiMapPin } from "react-icons/fi";
 import React from "react";
-import { experienceData } from "../data/data.js";
+import { experienceData } from "../data/experienceData.js";
 import { useSEO } from "../hooks/useSEO.js";
 
 const Experience = () => {

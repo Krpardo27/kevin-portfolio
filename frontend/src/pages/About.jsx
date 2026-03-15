@@ -1,4 +1,4 @@
-import { educationData } from "../data/data.js";
+import { educationData } from "../data/educationData.js";
 import { useSEO } from "../hooks/useSEO.js";
 
 const About = () => {

@@ -1,4 +1,4 @@
-import { FaChevronRight } from "react-icons/fa";
+import { FaChevronRight, FaFileAlt, FaFilePdf } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSEO } from "../hooks/useSEO";
 
@@ -47,27 +47,36 @@ const Home = () => {
             </p>
           </div>
 
-          {/* CTA */}
-          <div className="mt-4">
+          <div className="mt-6 flex flex-wrap gap-4">
+            {/* Descargar CV */}
             <Link
-              to="/about"
+              to="/cv"
               className="
-        inline-flex items-center gap-3
-        text-blue-400 font-medium
-        relative
-        after:absolute after:bottom-0 after:left-0 after:h-[1px]
-        after:w-0 after:bg-blue-400
-        hover:after:w-full after:transition-all
-        hover:text-blue-300 transition-colors
-        group
-      "
+    group
+    inline-flex items-center gap-3
+    px-7 py-3
+    rounded-xl
+    bg-gradient-to-r from-blue-500 to-cyan-500
+    text-white font-medium
+    shadow-lg shadow-blue-500/20
+    hover:shadow-blue-500/40
+    transition-all duration-300
+    hover:scale-[1.04]
+  "
             >
-              Conocer más sobre mí
+              <FaFileAlt
+                className="
+      text-white/90
+      transition-transform
+      group-hover:rotate-6
+    "
+              />
+              Resume
               <FaChevronRight
                 className="
-          transition-transform
-          group-hover:translate-x-1
-        "
+      transition-transform
+      group-hover:translate-x-1
+    "
               />
             </Link>
           </div>
