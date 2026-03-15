@@ -1,12 +1,22 @@
 import { createBrowserRouter } from "react-router-dom";
+import { lazy, Suspense } from "react";
+
 import MainLayout from "./layout/MainLayout";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Experience from "./pages/Experience";
-import Projects from "./pages/Projects";
-import Contact from "./pages/Contact";
 import Error404 from "./pages/Error404";
-import CV from "./pages/CV";
+import RouteLoader from "./components/RouteLoader";
+
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Experience = lazy(() => import("./pages/Experience"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Contact = lazy(() => import("./pages/Contact"));
+const CV = lazy(() => import("./pages/CV"));
+
+const withSuspense = (Component) => (
+  <Suspense fallback={<RouteLoader />}>
+    <Component />
+  </Suspense>
+);
 
 export const router = createBrowserRouter([
   {
@@ -15,27 +25,27 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: withSuspense(Home),
       },
       {
         path: "about",
-        element: <About />,
+        element: withSuspense(About),
       },
       {
         path: "experience",
-        element: <Experience />,
+        element: withSuspense(Experience),
       },
       {
         path: "projects",
-        element: <Projects />,
+        element: withSuspense(Projects),
       },
       {
         path: "contact",
-        element: <Contact />,
+        element: withSuspense(Contact),
       },
       {
         path: "cv",
-        element: <CV />,
+        element: withSuspense(CV),
       },
     ],
   },

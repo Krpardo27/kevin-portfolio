@@ -1,17 +1,18 @@
 import { useRef } from "react";
-import html2pdf from "html2pdf.js";
 import { cvData } from "../data/cvData";
 import { FaFilePdf, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 const CV = () => {
   const cvRef = useRef(null);
 
-  const downloadPDF = () => {
+  const downloadPDF = async () => {
+    const { default: html2pdf } = await import("html2pdf.js");
+
     html2pdf()
       .set({
         margin: 0,
         filename: "Kevin-Pardo-Resume.pdf",
-        html2canvas: { scale: 2, useCORS: true },
+        html2canvas: { scale: 3, useCORS: true },
         jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
       })
       .from(cvRef.current)
@@ -29,6 +30,7 @@ const CV = () => {
     if (id === "github") return <FaGithub />;
     if (id === "linkedin") return <FaLinkedin />;
     if (id === "email") return <FaEnvelope />;
+    return null;
   };
 
   return (
