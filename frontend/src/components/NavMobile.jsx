@@ -18,22 +18,22 @@ const NavMobile = () => {
         shadow-[0_-10px_30px_rgba(0,0,0,0.35)]
       "
     >
-      <ul className="flex justify-around items-center py-2">
+      <ul className="flex items-center justify-between py-2 w-full">
         {navigation.map(({ path, label }) => (
-          <li key={path}>
+          <li key={path} className="flex-1">
             <NavLink
               to={path}
               onClick={scrollToTop}
               className={({ isActive }) =>
                 `
-                  flex flex-col items-center gap-1 px-3 py-2
-                  text-[14px] font-medium transition-all
-                  ${
-                    isActive
-                      ? "text-cyan-400 scale-110 -translate-y-0.5"
-                      : "text-gray-400 hover:text-blue-400"
-                  }
-                `
+          flex flex-col items-center gap-1 py-2
+          text-[13px] font-medium transition-all
+          ${
+            isActive
+              ? "text-cyan-400 scale-105 -translate-y-0.5"
+              : "text-gray-400 hover:text-blue-400"
+          }
+          `
               }
             >
               {({ isActive }) => (
