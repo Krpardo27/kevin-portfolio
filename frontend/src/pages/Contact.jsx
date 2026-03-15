@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useSEO } from "../hooks/useSEO";
 
 const Contact = () => {
-
   useSEO({
     title: "Contacto | Kevin Pardo – Desarrollador Frontend React",
     description:
@@ -39,14 +38,16 @@ const Contact = () => {
       await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/contact`,
         data,
-        { headers: { "Content-Type": "application/json" } }
+        {
+          headers: { "Content-Type": "application/json" },
+          timeout: 5000,
+        },
       );
 
-      // espera a que el loader termine su animación
       setTimeout(() => {
         reset();
         setShowLoader(false);
-      }, 900); // debe coincidir con el MIN_VISIBLE_TIME
+      }, 400);
     } catch (error) {
       setShowLoader(false);
       setError("root", {
