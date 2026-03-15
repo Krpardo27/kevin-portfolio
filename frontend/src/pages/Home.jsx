@@ -1,57 +1,58 @@
 import { FaChevronRight, FaFileAlt, FaFilePdf } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useSEO } from "../hooks/useSEO";
+import SEO from "../components/SEO";
 
 const Home = () => {
-  useSEO({
-    title: "Kevin Pardo | Desarrollador Frontend React & MERN",
-    description:
-      "Portafolio de Kevin Pardo, desarrollador frontend especializado en React, Tailwind CSS y animaciones modernas.",
-    canonical: "https://kevcodesdev.cl/",
-  });
 
   return (
-    <section className="lg:mt-32 mt-8 px-4 py-5 flex flex-col items-center justify-center">
-      <div className="flex w-full flex-col lg:flex-row items-center gap-16">
-        {/* Texto */}
-        <div className="flex-1 w-full flex flex-col gap-8">
-          <header className="relative">
-            <h1
-              className="
+    <>
+      <SEO
+        title="Kevin Pardo | Desarrollador Frontend React & MERN"
+        description="Portafolio de Kevin Pardo, desarrollador frontend especializado en React, Tailwind CSS y aplicaciones modernas."
+        canonical="https://kevcodesdev.cl/"
+      />
+
+      <section className="lg:mt-32 mt-8 px-4 py-5 flex flex-col items-center justify-center">
+        <div className="flex w-full flex-col lg:flex-row items-center gap-16">
+          {/* Texto */}
+          <div className="flex-1 w-full flex flex-col gap-8">
+            <header className="relative">
+              <h1
+                className="
         text-4xl md:text-6xl font-semibold text-white tracking-tight
         mb-3
       "
-            >
-              Kevin Pardo Veas
-            </h1>
+              >
+                Kevin Pardo Veas
+              </h1>
 
-            {/* Subrayado decorativo */}
-            <div className="h-[2px] w-24 bg-gradient-to-r from-blue-400 to-cyan-400 mb-4" />
+              {/* Subrayado decorativo */}
+              <div className="h-[2px] w-24 bg-gradient-to-r from-blue-400 to-cyan-400 mb-4" />
 
-            <p
-              className="
+              <p
+                className="
         text-lg md:text-xl
         font-medium
         bg-gradient-to-r from-blue-400 to-cyan-300
         bg-clip-text text-transparent
       "
-            >
-              Desarrollador Frontend · React
-            </p>
-          </header>
-          <div className="flex flex-col gap-5 max-w-xl">
-            <p className="text-gray-300 leading-relaxed text-base md:text-lg">
-              Desarrollo interfaces web funcionales, claras y orientadas al
-              rendimiento, priorizando buenas prácticas y una experiencia de
-              usuario sólida.
-            </p>
-          </div>
+              >
+                Desarrollador Frontend · React
+              </p>
+            </header>
+            <div className="flex flex-col gap-5 max-w-xl">
+              <p className="text-gray-300 leading-relaxed text-base md:text-lg">
+                Desarrollo interfaces web funcionales, claras y orientadas al
+                rendimiento, priorizando buenas prácticas y una experiencia de
+                usuario sólida.
+              </p>
+            </div>
 
-          <div className="mt-6 flex flex-wrap gap-4">
-            {/* Descargar CV */}
-            <Link
-              to="/cv"
-              className="
+            <div className="mt-6 flex flex-wrap gap-4">
+              {/* Descargar CV */}
+              <Link
+                to="/cv"
+                className="
     group
     inline-flex items-center gap-3
     px-7 py-3
@@ -63,41 +64,42 @@ const Home = () => {
     transition-all duration-300
     hover:scale-[1.04]
   "
-            >
-              <FaFileAlt
-                className="
+              >
+                <FaFileAlt
+                  className="
       text-white/90
       transition-transform
       group-hover:rotate-6
     "
-              />
-              Resume
-              <FaChevronRight
-                className="
+                />
+                Resume
+                <FaChevronRight
+                  className="
       transition-transform
       group-hover:translate-x-1
     "
-              />
-            </Link>
+                />
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className="hidden lg:flex flex-1 items-center justify-center">
-          <div className="relative">
-            <img
-              src="/perfil.jpg"
-              alt="Kevin Pardo Veas"
-              loading="lazy"
-              className="rounded-full w-[220px] h-[220px] lg:w-[320px] lg:h-[320px]
+          <div className="hidden lg:flex flex-1 items-center justify-center">
+            <div className="relative">
+              <img
+                src="/perfil.jpg"
+                alt="Kevin Pardo Veas"
+                loading="lazy"
+                className="rounded-full w-[220px] h-[220px] lg:w-[320px] lg:h-[320px]
       object-cover border border-gray-700 shadow-xl"
-            />
-            <span
-              className="absolute inset-0 rounded-full border border-blue-500/30"
-              aria-hidden="true"
-            />
+              />
+              <span
+                className="absolute inset-0 rounded-full border border-blue-500/30"
+                aria-hidden="true"
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
