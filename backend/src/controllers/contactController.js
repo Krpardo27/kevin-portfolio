@@ -17,7 +17,12 @@ export const enviarContacto = async (req, res) => {
 
     const { nombre, email, telefono, mensaje } = req.body;
 
-    const safeMessage = mensaje.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const safeMessage = mensaje
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+
+    console.log("🔥 controller ejecutado");
 
     await resend.emails.send({
       from: "Kevin Pardo <contacto@kevcodesdev.cl>",
@@ -35,7 +40,6 @@ export const enviarContacto = async (req, res) => {
     return res.json({ success: true });
   } catch (error) {
     console.error("❌ Error contacto:", error);
-
     return res.status(500).json({
       message: "Error al enviar el mensaje",
     });

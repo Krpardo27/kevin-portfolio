@@ -25,15 +25,8 @@ app.use(
     },
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
-  })
+  }),
 );
-
-app.use((req, res, next) => {
-  if (!["GET", "POST"].includes(req.method)) {
-    return res.sendStatus(405);
-  }
-  next();
-});
 
 app.use(helmet());
 app.use(express.json({ limit: "10kb" }));
