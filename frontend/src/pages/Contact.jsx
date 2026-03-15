@@ -30,9 +30,11 @@ const Contact = () => {
   });
 
   const [showLoader, setShowLoader] = useState(false);
+  const [sent, setSent] = useState(false);
 
   const onSubmit = async (data) => {
     setShowLoader(true);
+    setSent(false);
 
     try {
       await axios.post(
@@ -47,9 +49,11 @@ const Contact = () => {
       setTimeout(() => {
         reset();
         setShowLoader(false);
+        setSent(true);
       }, 400);
     } catch (error) {
       setShowLoader(false);
+
       setError("root", {
         type: "server",
         message:
@@ -230,9 +234,9 @@ const Contact = () => {
             </p>
           )}
 
-          {isSubmitSuccessful && (
-            <p className="text-green-400 text-center text-sm">
-              Mensaje enviado correctamente
+          {sent && (
+            <p className="text-green-400 text-center text-sm font-medium animate-fadeInUp">
+              ¡Mensaje enviado con éxito! Te contactaré pronto.
             </p>
           )}
 
