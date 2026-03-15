@@ -12,10 +12,14 @@ router.get("/", (req, res) => {
 
 router.post(
   "/contact",
-  contactLimiter,
+  (req, res, next) => {
+    console.log("1️⃣ route hit");
+    next();
+  },
+  // contactLimiter,
   contactoValidator,
   validarCampos,
-  enviarContacto
+  enviarContacto,
 );
 
 export default router;
